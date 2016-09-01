@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+</head>
+<style>
+*{
+padding:0px; margin:0px;}
+#div1{ width:300px; height:50px;border:#000000 solid 1px; position:absolute;top:150px; left:150px;}
+#div2{  background:#0000FF; width:0px; height:50px; position:absolute;filter:alpha(opacity=50);  
+      -moz-opacity:0.5;  
+      -khtml-opacity: 0.5;  
+      opacity: 0.5;
+  }
+img{position:absolute;top:0px;}
+
+</style>
+<script>
+window.onload = function (){
+   var oDiv = document.getElementsByTagName('div')[0];
+   var aImg = document.getElementsByTagName('img');
+   var oDiv2 = document.getElementById('div2');
+   var timer=null;
+   var timer1=null;
+   var num=0;
+   var onff=true;
+   var len= parseInt(getStyle(oDiv,'width'));
+
+   for(var i=0;i<aImg.length;i++){
+       aImg[i].style.left = i*50+'px';
+       aImg[i].index=i;
+   }
+
+   oDiv.onclick = function (){
+      ini();
+      doMove(oDiv2,'width',15,len,Alpha);   //进度条宽度变化，完成后回调透明度函数      
+      doTop();  
+   }; 
+
+//初始化
+   function ini(){
+      oDiv2.style.width=0+'px';
+      oDiv2.style.opacity = 80/100;
+      oDiv2.style.filter = 'alpha(opacity='+50+')';
+
+      for(var i=0;i<aImg.length;i++){
+         aImg[i].style.top = '0px';
+         aImg[i].style.opacity=1;
+         aImg[i].style.filter = 'alpha(opacity='+100+')';
+      }
+   }
+
+// 运动函数
+   function doMove(obj,attr,distance,target,enFn){
+      if(obj.onff){
+         return;
+      }
+      obj.onff=true;
+      clearInterval(obj.timer);
+      distance = parseInt(getStyle(obj,attr)) < target ? distance : -distance;
+      
+      obj.timer=setInterval(function(){
+         var speed =parseInt(getStyle(obj,attr)) +distance;
+             
+             if(distance>0 && speed > target || distance<0 && speed < target){
+                speed=target;
+             }
+             
+             obj.style[attr] = speed +'px';
+
+             if( speed==target){
+               clearInterval(obj.timer);
+
+               if(enFn){                
+                  enFn();                                  
+               }
+
+               obj.onff=false;
+               
+             }
+      },80);
+   };
+// 图片向上运动
+   function doTop(){
+      clearInterval(timer);
+      timer = setInterval(function(){
+         doMove(aImg[num],'top',10,-150,AlphaImg(aImg[num])); 
+         num++;
+         if(num==aImg.length){
+            clearInterval(timer);
+            num=0;
+         }
+      },100);
+   }
+
+// 透明度变化 
+  function Alpha(){
+    oDiv2.onff=false;
+    if(oDiv2.onff){
+      return;
+    }
+    oDiv2.onff=true;
+    if(parseInt(getStyle(oDiv2,'width'))==len){
+        
+      clearInterval(oDiv2.tim);        
+      var spe=50;
+      var  dir=5;
+      oDiv2.tim=setInterval(function(){
+        spe = spe -dir;
+        if(spe<=0){
+          spe = 0;
+        }
+        oDiv2.style.opacity = spe/100;
+        oDiv2.style.filter = 'alpha(opacity='+spe+')';
+                  
+        if(spe==0){
+          clearInterval(oDiv2.tim);
+          oDiv2.onff=false;
+        }
+      },80);
+    } 
+  }
+
+//图片透明度变化
+  function AlphaImg(obj){
+
+    clearInterval(obj.timer1);        
+        var spe=100;
+        var  dir=7;
+          obj.timer1=setInterval(function(){
+            spe = spe -dir;
+            if(spe<=0){
+              spe = 0;
+            }
+            obj.style.opacity = spe/100;
+            obj.style.filter = 'alpha(opacity='+spe+')';
+           
+            if(spe==0){
+              clearInterval(obj.timer1);
+            }
+          },80);
+    } 
+  };
+
+function getStyle(obj,arrt){
+    return obj.currentStyle ? obj.currentStyle[arrt] : getComputedStyle(obj,0)[arrt];
+};
+</script>
+<body>
+<div id="div1">
+<!-- 图片 -->
+    <img  src="11.png"/>
+    <img  src="11.png"/>
+    <img  src="11.png"/>
+    <img  src="11.png"/>
+    <img  src="11.png"/>
+    <img  src="11.png"/>
+<!-- 进度条 -->
+    <div id="div2"></div>
+
+</div>
+</body>
+</html>

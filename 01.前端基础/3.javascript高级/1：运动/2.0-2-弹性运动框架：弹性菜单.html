@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+*{margin: 0;padding: 0;}
+li{list-style: none;}
+ul{width: 400px;height: 30px;position: relative;margin: 100px auto 0;}
+li{float: left;width: 98px;height: 28px;line-height: 28px;border: 1px solid #ccc;text-align: center;z-index: 2;position: relative;cursor: pointer;}
+.bg{width: 100px;height: 2px;overflow: hidden;background-color: red;border: none;position: absolute;bottom: 1px;left: 0;z-index: 1;}
+</style>
+<script>
+	window.onload = function(){
+		var oUl = document.getElementById('ul1');
+		var aLi = oUl.getElementsByTagName('li');
+		var oBg = aLi[aLi.length-1];
+
+		for(var i=0;i<aLi.length-1;i++){
+			aLi[i].onmouseover = function(){
+				flexMove(oBg,this.offsetLeft);
+			}
+		}
+	}
+	var iSpeed = 0;
+	var left = 0;
+	function flexMove(obj,iTarget){
+		clearInterval(obj.timer);
+		obj.timer = setInterval(function(){
+			iSpeed += (iTarget-obj.offsetLeft)/5;
+			iSpeed *= 0.7;
+			left += iSpeed;
+
+			if(Math.abs(iSpeed)<1 && Math.abs(iTarget-left)<1){
+				//abs为取绝对值，速度-1到1之间目标值在原点附近时清楚定时器(iSpeed和iTarget-left不可能为0)
+				clearInterval(obj.timer);
+				obj.style.left = iTarget +'px';
+			}else{
+				obj.style.left = left +'px';
+				//obj.offsetLeft.left只能为整数引起像素偏差,用left+= 存起来代替
+			}
+			
+			document.title = obj.offsetLeft + '|' +iTarget +'|' + iSpeed;
+		},30)
+	}
+		
+</script>
+</head>
+<body>
+
+	<ul id="ul1">
+		<li>首页</li>
+		<li>关于我们</li>
+		<li>产品</li>
+		<li>联系方式</li>
+		<li class="bg"></li>
+	</ul>
+
+</body>
+</html>

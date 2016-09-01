@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>innerHtml</title>
+    <script type="text/javascript">
+    window.onload = function()
+    {
+        var oAttr = document.getElementById("attr");
+        var oVal = document.getElementById("val");
+        var oBtn = document.getElementById("btn1");
+        var oDiv = document.getElementById("div1");
+
+        oBtn.onclick = function()
+        {
+            //oDiv.style.oAttr.value = oVal.value;不正确，用[]
+            oDiv.style[oAttr.value] = oVal.value;
+            //js中允许把.替换成[],这里的可以用来表示很多属性名
+        };
+    };
+    </script>
+    <style type="text/css">
+         #div1 { width:100px; height:100px; border:1px solid #333;}
+    </style>
+
+</head>
+<body>
+    请输入属性名：<input id="attr" type="text"/></br>
+    请输入属性值：<input id="val" type="text"/></br>
+    <input id="btn1" type="button" value="确定"/>
+    <div id="div1"></div>
+</body>
+</html>

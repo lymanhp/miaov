@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<style>
+
+</style>
+
+<script>
+// 一：js作用域：js代码只有在<script>里面才生效
+
+/* 二：预解析
+  1）第一步找var function 参数
+     变量 = 未定义
+          所有的变量，在正式运行代码之前，都提前赋了一个未定义的值
+     fn1 = function fu1(){};
+          所有的函数，在正式运行代码之前，都是整个函数块   
+  把上面的叫做js的预解析.
+
+  2）然后才逐行解读代码,改变预解析里面的值
+     1.读取代码遇到表达式（= + - * / ++ -- ! 参数....)
+     表达式可以修改预解析的值，函数不会
+     2.函数调用 1）预解析 2）逐行解读代码
+*/
+alert(a);    //function a(){alert(4);}
+var a = 1;
+alert(a);    //1
+function a(){alert(2);}
+alert(a);    //1
+var a = 3;
+alert(a);    //3
+function a(){alert(4);}
+alert(a);    //3
+/*解答：1）a = 未定义
+           a = function a(){alert(2);}
+         当变量和函数重名，只留下函数，所以最后 a = function a(){alert(4);}
+        2) 遇到表达式会修改预解析的值
+*/
+
+
+/* 三、域
+       script 全局变量 全局函数 自上而下
+       函数   局部变量 局部函数 由里到外
+*/
+var a = 1;
+function fna(){
+  alert(a);  //undefine 
+  var a = 2; //局部
+};
+fna();
+alert(a);    //1 全局
+/*解答：1）预解析
+           a = 未定义
+           fn1 =function fn1(){alert(a);var a = 2;}; 
+        2) 逐行解析代码
+           表达式 a = 1
+           函数调用（局部）
+              1）a = 未定义
+              2）a = 2
+*/
+
+/* 四、作用域链
+*/
+var a1 = 1;
+function fna1(){
+  alert(a1); //1
+  a1 = 2; 
+};
+fna1();
+alert(a1);   //2
+/*解答：1）预解析
+           a = 未定义
+           fn1 =function fn1(){alert(a);var a = 2;}; 
+        2) 逐行解析代码
+           表达式 a = 1
+           函数调用（局部）
+               预解析找不到var和function,会产生作用域链由里及外找父级的预解析库，并可以改变父级预解析库里面的值
+*/
+
+
+
+var a2 = 1;
+function fna2(a2){ //多了一个参数a2,参数相当于var a2,会局部预解析
+  alert(a2); //undefine
+  a2 = 2; 
+};
+fna2();
+alert(a2);   //1
+
+
+var a3 = 1;
+function fna2(a3){ //a2改成参数a3,a3为全局变量，相当于var a3 = 1,会局部预解析
+  alert(a3); //1
+  a3 = 2; 
+};
+fna2(a3);
+alert(a3);   //1
+</script>
+</head>
+
+<body>
+
+
+
+</body>
+</html>

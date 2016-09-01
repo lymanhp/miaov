@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<!--
+1.
+splice() 方法从数组中删除、替换、添加项目，然后返回被删除的项目
+
+删除——可以删除任意数量的项，只需要指定2个参数：要删除的第一项的位置和要删除的项数
+替换——可以指向指定位置插入任意数量的项，且同时删除任意数量的项，只需要指定3个指定参数：起始位置、要删除的项数和要插入的任意数量项。
+插入——可以向指定位置插入任意数量的项，只需要提供3个参数：起始位置、0和要插入的项。
+
+2.数组去重
+
+-->
+<script>
+// 1.splice() 方法
+var arr = [ 'TM', '钟毅', '张森', '杜鹏', 'Leo' ];
+// 删除、替换、添加
+alert( arr.splice(0,2) ); 	// 从第0项起删除两项   arr = ['张森', '杜鹏', 'Leo']
+
+alert( arr.splice( 1, 2, '替换' ) );  // arr = ['张森', '替换']
+
+alert( arr.splice( 1, 0, '插入1', '插入2' ) );  // arr = ['张森','插入1', '插入2', '替换']
+
+alert( arr );
+
+// 2.数组去重
+var arr = [ 1,2,2,4,2 ];
+
+for ( var i=0; i<arr.length; i++ ) {
+	for ( var j=i+1; j<arr.length; j++ ) {
+		if ( arr[i] == arr[j] ) {
+			arr.splice( j, 1 );
+			j--; //将第i项和第i+1项轮流比较，如果相等，就用splice()从数组中删除，并且将数组长度减1
+		}
+	}
+}
+alert( arr );
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

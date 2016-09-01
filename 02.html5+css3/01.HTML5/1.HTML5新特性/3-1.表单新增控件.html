@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+新增表单控件：type的属性值
+email  :  电子邮箱文本框，跟普通的没什么区别  当输入不是邮箱的时候，验证通不过  移动端的键盘会有变化
+tel   :   电话号码 pc端变化，移动端打开页面会出现电话键盘
+url   :   网页的URL
+search  :  搜索引擎 chrome下输入文字后，会多出一个关闭的X，没有其他特殊用途
+range  :  特定范围内的数值选择器  min、max、step(步数)、value(当前值)
+number  :  只能包含数字的输入框
+color  :  颜色选择器
+datetime  :  显示完整日期
+datetime-local  :  显示完整日期，不含时区
+time  :  显示时间，不含时区
+date  :    显示日期
+week  :  显示周
+month  :  显示月
+
+
+<form>
+	email<input type="email" />
+	tel<input type="tel"/>
+	url<input type="url"/>
+	search<input type="search" />
+	range<input type="range" step="2" min="0" max="10" value="2" />
+	<!-- step每次走的格数 -->
+	number<input type="number" />
+	color<input type="color" />
+	datetime-local<input type="datetime-local" />
+	time<input type="time" />
+	date<input type="date" />
+	week<input type="week" />
+	month<input type="month" />
+	<input type="submit" />
+</form>
+</body>
+</html>

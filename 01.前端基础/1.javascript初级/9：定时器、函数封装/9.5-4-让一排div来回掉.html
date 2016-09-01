@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<!-- <script src="miaov.js"></script> -->
+<script>
+function doMove ( obj, attr,distance, target,speed, endFn ) {  
+    distance = parseInt(getStyle( obj, attr )) < target ? distance : -distance;
+    clearInterval( obj.timer );
+    obj.timer = setInterval(function () {
+        var pos = parseInt(getStyle( obj, attr )) + distance;          // 步长
+
+        if ( pos > target && distance > 0 ||  pos < target && distance < 0  ) {
+            pos = target;
+        }
+        
+        obj.style[attr] = pos + 'px';
+        
+        if ( pos == target ) {
+            clearInterval( obj.timer );      
+            /*
+            if ( endFn ) {
+                endFn();
+            }
+            */
+            endFn && endFn();         
+        }   
+    }, speed);
+}
+function getStyle ( obj, attr ) { return obj.currentStyle?obj.currentStyle[attr] : getComputedStyle( obj )[attr]; }
+
+window.onload = function(){
+    var str = '';
+    var aDiv = document.getElementsByTagName('div');
+    var timer = null;
+    var num = 0;
+    var len = 15;
+    var onOff = true;
+
+    for(var i=0;i<len;i++){
+        str += '<div style="width:50px;height:50px;background:red;position:absolute;top:0px;left:'+60*i+'px;"></div>';
+    }
+    document.body.innerHTML = str;
+
+    document.onclick = function(){
+        clearInterval(timer);
+        if(onOff && parseInt(getStyle( aDiv[len-1], 'top' )) ==0){
+            timer = setInterval(function(){
+                doMove(aDiv[num],'top',20,500,30);
+                num++;
+                if(num == len){
+                    clearInterval(timer);
+                    onOff = false; //设置为false不会执行这里面的if
+                    num = 0;
+                }
+            },100);
+        }
+        else if(parseInt(getStyle( aDiv[len-1], 'top' )) ==500){
+            timer = setInterval(function(){
+                doMove(aDiv[num],'top',20,0,30);
+                num++;
+                if(num == len){
+                    clearInterval(timer);
+                    onOff = true; //完成后onOff重置为ture
+                    num = 0;
+                }
+            },100);
+        }
+    }
+
+}
+</script>
+
+
+</head>
+
+<body>
+</body>
+</html>
+

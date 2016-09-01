@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+*{margin: 0;padding: 0;}
+#div1{position: relative;/*必须有定位父元素*/border: 1px solid black;width: 680px;height: 120px;margin: 10px auto;
+overflow: hidden;}
+#div1 ul{position: absolute;}
+#div1 ul li{list-style: none;float: left;width: 150px;height: 100px;padding: 10px;}
+#div1 ul li span{width: 150px;height: 100px;float: left;}
+#div1 a{position: absolute;width: 20px;height: 50px;background-color: #ccc;color: #fff;font-size: 20px;text-align: center;line-height: 50px;top: 50%;margin-top: -25px;z-index: 999;text-decoration: none;}
+#div1 #a1{left: 0;}
+#div1 #a2{right: 0;}
+</style>
+<script>
+	window.onload = function(){
+		var oDiv = document.getElementById('div1');
+		var oUl = document.getElementsByTagName('ul')[0];
+		var aLi = document.getElementsByTagName('li');
+		var timer = null;
+		var iSpeed = -1;
+
+		oUl.innerHTML += oUl.innerHTML; //将无缝滚动复制一份出来
+		oUl.style.width = aLi.length*aLi[0].offsetWidth + 'px'; //动态设置ul宽度,按照这种写法li只能用padding
+
+		function fnMove(){
+			if(oUl.offsetLeft <= -oUl.offsetWidth/2){
+				//iSpeed小于0向左运动,运动到一半的时候拉回来
+				oUl.style.left = 0;
+			}
+			else if(oUl.offsetLeft >= 0){
+				//iSpeed小于0向右运动,拉到一半
+				oUl.style.left = -oUl.offsetWidth/2 + 'px';
+			}
+
+			oUl.style.left = oUl.offsetLeft + iSpeed + 'px';
+		}
+
+		//放计时器里运动
+		timer = setInterval(fnMove,30);
+
+		oDiv.onmouseover = function(){
+			clearInterval(timer);
+		}
+		oDiv.onmouseout = function(){
+			timer = setInterval(fnMove,30);
+		}
+
+		var aA = document.getElementsByTagName('a');
+		aA[0].onclick = function(){
+			iSpeed = -1; //像左走
+		}
+		aA[1].onclick = function(){
+			iSpeed = 1; //向右走
+		}
+	}
+		
+</script>
+</head>
+
+<body>
+	<div id="div1">
+		<a href="javascript:;" id="a1">&lt;</a>
+		<a href="javascript:;" id="a2">&gt;</a>
+		<ul>
+			<li>
+				<span style="background-color:#2196F3">1</span>
+			</li>
+			<li>
+				<span style="background-color:#CDDC39">2</span>
+			</li>
+			<li>
+				<span style="background-color:#009688">3</span>
+			</li>
+			<li>
+				<span style="background-color:#FF9800">4</span>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

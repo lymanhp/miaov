@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<style>
+
+</style>
+
+<script>
+/*var a = Number('10');
+alert(a);  //10
+var b = Number('abc');
+alert(b);  //NaN
+/*
+// NaN：not a number 不是数字 的 数字类型
+// isNaN：Is not a number 是非数字为ture
+/*  alert( isNaN('250') );
+    isNaN('250')先用Number()数据类型转化  '250' => 250 => false
+*/
+window.onload = function(){
+	var aInp = document.getElementsByTagName('input');
+  var str = '';
+	aInp[1].onclick = function(){
+		str = aInp[0].value; 
+		//HTML 中拿到的内容是字符串,不能用typeof。而isNaN先用Number()进行数据类型转换，再判断是否不是数字
+		if(isNaN(str)){
+			alert(str+'不是数字');
+		}
+		else{
+			alert(str+'是数字');
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+
+<input type="text" />
+<input type="button" value="判断输入值是不是数字" />
+
+</body>
+</html>

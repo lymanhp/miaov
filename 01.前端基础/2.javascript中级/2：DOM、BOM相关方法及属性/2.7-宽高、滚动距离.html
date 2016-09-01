@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+window.onload = function() {
+	
+	//可视区宽高clientWidth clientHeight:样式宽 + padding 
+	alert( '窗口可视区高：'+document.documentElement.clientHeight );
+
+	//占位宽高（文档宽高）offsetWidth offsetHeight：样式宽 + padding + border
+
+	//内容实际宽高scrollWidth scrollHeight:内容宽+padding 
+
+	var oDiv1 = document.getElementById('div1');
+	alert('可视区高'+oDiv1.clientHeight);
+	alert('文档高'+oDiv1.offsetHeight);
+	alert('内容实际高'+oDiv1.scrollHeight);
+	
+
+	//滚动距离 scrollTop scrollLeft
+	document.onclick = function() {
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop; //后面一个为了兼容chrome，
+		alert('滚动距离:'+scrollTop);
+	}
+}
+</script>
+</head>
+
+<body style="height:2000px;">
+	<div id="div1" style="width:100px;height:100px;border: 1px solid red;  padding: 10px;margin: 10px;">
+    	<div style="height: 200px;width: 100px; background: red;"></div>
+    </div>
+</body>
+</html>

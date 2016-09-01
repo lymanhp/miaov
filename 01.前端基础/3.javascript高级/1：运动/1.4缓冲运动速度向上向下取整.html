@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width: 100px; height: 100px; background: red;margin-top: 10px;position: absolute;left: 0;top: 50px;}
+</style>
+<script>
+	var timer = null; //必须放在外面避免产生闭包
+	function startMove(target){
+		var oDiv = document.getElementById('div1');
+		
+		clearInterval(timer); //先关后开，避免重复点击产生多个timer，速度越来越快
+		timer = setInterval(function(){
+			
+			var iSpeed = (target - oDiv.offsetLeft)/5;  
+			/*
+			缓冲运动iSpeed要放在里面,iSpeed会越来越小，通过console.log可以发现iSpeed循环为小数的时候，oDiv.offsetLeft
+			必须为整数会四舍五入，当iSpeed<0.5，oDiv.offsetLeft则会一直四舍，导致oDiv.offsetLeft无法大于target,一直执行计时器。
+			所以需要Math.ceil()向上取整。
+			*/
+			//console.log('oDiv.style.left'+oDiv.style.left);
+			//console.log('速度'+iSpeed);
+			//console.log('offsetLeft'+oDiv.offsetLeft);
+			iSpeed = Math.ceil(iSpeed);
+
+			if(oDiv.offsetLeft==target){
+				clearInterval(timer);
+			}else{
+				oDiv.style.left = oDiv.offsetLeft +iSpeed+'px'; //必须放在else里面，否则会导致到达位置后再点击还会运动
+			}
+		},30);
+	}
+
+	window.onload = function(){
+		var oInput = document.getElementsByTagName('input')[0];
+		oInput.onclick = function(){
+			startMove(300);
+		}
+	}
+		
+</script>
+</head>
+
+<body>
+	<input type="button" value="开始运动" class="move">
+	<div id="div1"></div>
+</body>
+</html>

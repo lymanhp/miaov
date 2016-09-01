@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+window.onload = function() {
+
+	//获取表单中一个元素,而不需要通过id获取  表单.元素的name
+	var oForm = document.getElementById('form1');
+	//var oText = document.getElementById('text1');
+	
+	document.onclick = function() {
+		//alert(oText.value);
+		alert( '通过表单的name属性获取表单元素'+oForm.username );
+		alert( '表单的value值：'+oForm.username.value );
+		
+	}	
+}
+</script>
+</head>
+
+<body>
+	<form id="form1">
+    	<input type="text" id="text1" name="username" value="点我" />
+    </form>
+</body>
+</html>

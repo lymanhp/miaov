@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<script>
+///////////   charAt()   ////////////
+var str = '妙味课堂';
+console.log(str.charAt());      //妙
+//1.返回索引字符，chrAt(索引值)，默认为0
+console.log(str.charCodeAt(0));  // 22937	
+/* 2.返回索引字符的ASCII编码		
+	0~9  48~57
+	a~z	 97~122	
+	A~Z  65~90
+	扩展：字符串比较大小：比较第一个字符的ASCII编码
+*/
+console.log(String.fromCharCode(22937, 21619));  //妙味
+//3.返回ASCII编码对应的字符，一个字符用一个逗号隔开
+
+
+
+
+
+
+//////////   indexOf()   ////////////
+var str = 'www.miaov.com/2013ww';
+console.log(str.indexOf('m'));  //4
+//返回字符串第一次出现的位置
+/*
+str.indexOf('m', 5) 从第五个起字符串第一次出现的位置
+str.indexOf('X');	找不到字符串，返回值为-1
+*/
+
+
+
+
+
+
+/////////   substring(),slice()字符串截取   ///////////
+var str = '妙味课堂是一支独具特色的IT培训团队';
+console.log(str.substring(0,2)); //妙味
+
+// alert( str.substring(2,0) );				
+// 可以检测两个数，大的往后扔，小的往前扔
+// alert( str.substring(-3, 2) );			// -3 当成0处理
+// alert( str.substring(2, -3) );	
+
+// slice和substring区别
+// alert( str.slice( 2, 0 ) );				// 不交换位置
+//alert( str.slice( -4, -2 ) );				// 负数从后面倒着往前数~
+
+
+
+
+/////// toUpperCase toLowerCase ////////
+// alert( str.toUpperCase() );			// 转成大写
+// alert( str.toLowerCase() );			// 转成小写
+
+
+
+
+
+/////////   split()将字符串分割成数组  ///////////
+var str = 'www.miaov.com';
+// alert( typeof str.split('.') );				// [ 'www', 'miaov', 'com' ]
+var arr = str.split( '.' );
+// alert( arr[1] );
+
+var str1 = 'leo';
+// alert( typeof str1.split() );			// [ 'leo' ]
+
+// alert( str1.split('') );			// [ 'l', 'e', 'o' ]
+
+var str2 = '妙味课堂';
+
+// alert( str2.split('味') );               //妙,味课堂
+
+var str3 = '/www.miaov.com/';
+
+// alert( str3.split('/').length );			// [ , www.miaov.com,  ]
+
+var str4 = '2013-11-29-23-07';
+
+// alert( str4.split('-', 3) );				// 2013,11,29
+
+
+
+
+/////  join()将数组转化为字符串
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

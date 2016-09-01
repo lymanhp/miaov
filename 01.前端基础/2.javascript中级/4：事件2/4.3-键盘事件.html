@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+/*
+onkeydown : 当键盘按键按下的时候触发
+onkeyup : 当键盘按键抬起的时候触发
+
+event.keyCode : 数字类型 表示键盘按键的值
+	 .ctrlKey,shiftKey,altKey 布尔值类型  表示当一个事件发生的时候，如果ctrl键,shift键, alt键是按下的状态，返回true，否则返回false
+	
+*/
+
+document.onkeydown = function(ev) {
+	var ev = ev || event;
+	alert(ev.keyCode);  //键盘上按下不同的键弹出不同的值
+}
+
+document.onclick = function(ev) {
+	var ev = ev || event;
+	
+	alert(ev.ctrlKey);
+}
+</script>
+</head>
+
+<body>
+<div>按下字母键,ctrl键,shift键, alt键</div>
+</body>
+</html>

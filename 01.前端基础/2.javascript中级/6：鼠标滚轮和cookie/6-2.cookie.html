@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+/*
+cookie : 存储数据，当用户访问了某个网站（网页）的时候，我们就可以通过cookie来像访问者电脑上存储数据
+	1.谷歌不允许自己设置cookie
+	  document.cookie = '名字=值';
+	  document.cookie = '名称=值;expires=' + 字符串格式的时间;  
+
+	2.cookie默认是临时存储的，当浏览器关闭进程的时候自动销毁.
+	如果我们想长时间存放一个cookie。需要在设置这个cookie的时候同时给他设置一个过期的时间
+
+	3.我们通过document.cookie来获取当前网站下的cookie的时候，得到的字符串形式的值，他包含了当前网站下所有的cookie。他会把所有的cookie通过一个分号+空格的形式串联起来
+
+	4.encodeURI将'名字=值'中的值进行编码
+	  decodeURI解码
+*/
+
+
+// 1.自定义cookie
+document.cookie = 'username=leo';
+document.cookie = 'age=23';
+// 2.设置过期时间
+var oDate = new Date();
+oDate.setDate( oDate.getDate() + 5 ); 
+document.cookie = 'username=leo;expires=' + oDate.toGMTString(); //动态设置当前时间的5天后过期。toGMTString()将日期对象转换为日期字符串
+//3.获取当前网站cookie
+console.log(document.cookie);  //结果为username=leo; age=23
+//4.编码解码
+document.cookie = 'username='+ encodeURI('leo你好'); //编码
+console.log(document.cookie)  
+console.log(decodeURI(document.cookie)); //解码
+
+
+
+
+
+//设置cookie key为名字，value为值，t为过期时间
+function setCookie(key, value, t) {
+	var oDate = new Date();
+	oDate.setDate( oDate.getDate() + t );
+	document.cookie = key + '=' + value + ';expires=' + oDate.toGMTString();
+}
+//读取字符串形式中的某一个cookie，key为名字
+function getCookie(key) {
+	var arr1 = document.cookie.split('; ');  //通过; 拆分分号+空格形式的cookie
+	for (var i=0; i<arr1.length; i++) {
+		var arr2 = arr1[i].split('='); //第二次通过=拆分
+		if ( arr2[0] == key ) {
+			return decodeURI(arr2[1]); //cookie事先编码需要解码
+		}
+	}
+}
+// 删除cookie
+function removeCookie(key) {
+	setCookie(key, '', -1); //-1减去一天为过期时间
+}
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

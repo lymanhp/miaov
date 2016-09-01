@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width: 100px; height: 100px; background: red;position: absolute;right: 0;}
+</style>
+<script>
+	window.onscroll = function(){
+		var oDiv = document.getElementById('div1');
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+		// 滚动居中:滚动的时候需要重新计算top值
+		// oDiv.style.top = scrollTop + (document.documentElement.clientHeight-oDiv.offsetHeight)/2 + 'px';
+		var t = scrollTop +(document.documentElement.clientHeight-oDiv.offsetHeight)/2;
+
+		// 潜在问题:目标不是整数时，会导致抖动。用parseInt来取整
+		startMove(parseInt(t));  
+	}
+
+	var timer = null;
+	function startMove(target){
+		var oDiv = document.getElementById('div1');
+		clearInterval(timer);
+		timer = setInterval(function(){
+			var iSpeed = (target-oDiv.offsetTop)/5; //缓冲运动
+			iSpeed = iSpeed>0?Math.ceil(iSpeed):Math.floor(iSpeed);
+
+			if(oDiv.offsetTop == target){ //依然用offsetTop(到body的高)
+				clearInterval(timer);
+			}else{
+			   oDiv.style.top = oDiv.offsetTop + iSpeed + 'px';
+			}
+		},20)
+	}
+		
+</script>
+</head>
+
+<body style="height:2000px;">
+	<div id="div1"></div>
+</body>
+</html>

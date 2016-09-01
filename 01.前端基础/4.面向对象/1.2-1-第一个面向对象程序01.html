@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+function creatPerson(name,sex){ //构造函数
+	var obj = new Object();
+
+	obj.name=name;
+	obj.sex=sex;
+	obj.showName = function(){
+		alert('我的名字叫:'+this.name);
+	}
+	obj.showSex = function(){
+		alert('我的性别:'+this.sex);
+	}
+	return obj; //需要返回对象
+}
+
+var p1 = creatPerson('Jack','男');
+var p2 = creatPerson('Rose','女');
+p1.showName();
+p1.showSex();
+p2.showName();
+p2.showSex();
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+/*
+BOM : Browser Object Model 浏览器对象模型
+
+BOM方法：open(url，打开方式) 打开一个新窗口
+		  如果url为空，默认打开一个空白页面
+		  如果打开方式为空，默认为新窗口
+
+		  open()返回值：返回新打开窗口的window对象
+
+		  window.open('http://www.baidu.com', '_self');
+
+	  	 close()方法  关闭窗口
+
+BOM属性：window.navigator.userAgent : 浏览器信息，可以用来判断是否为ie
+
+		 window.location : 浏览器地址信息
+
+		 window.location.href = window.location内容
+		 window.location.search = url?后面的内容
+		 window.location.hash = url#后面的内容
+
+*/
+window.onload = function() {
+	var aInput = document.getElementsByTagName('input');
+	var opener = null;
+	
+	aInput[0].onclick = function() {
+		
+		
+		opener = window.open();//返回值 返回的新开页面的window对象
+		
+		//alert(opener == window)
+		
+		//opener.document.body.style.background = 'red';	
+	}
+	
+	aInput[1].onclick = function() {
+		
+		window.close();
+		/*
+		兼容性问题
+		ff : 无法关闭
+		chrome : 直接关闭
+		ie : 询问用户
+		*/
+		
+	}
+	
+	aInput[2].onclick = function() {
+		opener.close();	//可以通过关闭用window.open方法打开的窗口
+	}
+
+	if ( window.navigator.userAgent.indexOf('MSIE') != -1 ) {
+	alert('我是ie');
+	} else {
+		alert('我不是ie');
+	}
+
+	//alert( window.location );
+
+	//alert( window.location.href );//地址
+
+	//alert( window.location.search );
+
+	//alert( window.location.hash );
+
+
+}
+</script>
+</head>
+
+<body>
+	<input type="button" value="打开新窗口" />
+    <input type="button" value="关闭窗口" />
+    <input type="button" value="关闭新窗口" />
+</body>
+</html>

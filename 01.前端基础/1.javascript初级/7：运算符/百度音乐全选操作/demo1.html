@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+ <head>
+  <meta charset="UTF-8" />
+  <!--meta http-equiv="x-ua-compatible"content="ie=7"/--> 
+  <title>百度音乐全选操作</title>
+  <style type="text/css">
+	ul,li{margin:0;padding:0;list-style:none;}
+	button{margin:0px;padding:0px;}
+	#box{
+		border:1px solid #000;
+		width:310px;
+		height:216px;
+	}
+	ul{
+		font-size:12px;
+	}
+	li{
+		width:294px; /*--310px--*/
+		height:30px;
+		line-height:30px;
+		padding-left:16px;
+		position:relative;
+	}
+	li input{
+		position:relative;
+		top:2px;
+	}
+	li span{
+		position:absolute;
+		left:207px;
+	}
+	#tool{
+		border-top:1px solid #dedede;
+		width:294px;
+		height:34px;
+		padding-left:16px;
+		font-size:12px;
+	}
+	#tool input{
+		margin-top:6px;
+		position:relative;
+		top:2px;
+	}
+	#tool button{
+		border:0;
+		width:65px;  /*--65px--*/
+		height:25px;
+		font-size:12px;
+		margin-right:7px;
+		padding-left:28px;
+		position:relative;
+		left:23px;
+	}
+  </style>
+  <script type="text/javascript">
+	window.onload = function(){
+		var oBox = document.getElementById('box');
+		var aLi = oBox.getElementsByTagName('li');
+		var oList = document.getElementById('list');
+		var oAllSel = document.getElementById('allSel');
+		var aInput = oList.getElementsByTagName('input');
+		var aBtn = oBox.getElementsByTagName('button');
+		
+
+		for(var i=0;i<aLi.length;i++){
+			if(i%2 == 0){
+				aLi[i].style.backgroundColor = '#f7ffff';
+			}else{
+				aLi[i].style.backgroundColor = '#ffffff';
+			}
+		}
+		
+		for(var i=0;i<aBtn.length;i++){
+			aBtn[i].style.background = 'url(imgs/'+i+'.gif) no-repeat';
+		}
+
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].index = i;
+			aLi[i].oldCol = aLi[i].style.backgroundColor
+			aLi[i].onmouseover = function(){
+				aLi[this.index].style.backgroundColor = '#efefef';
+			}
+			aLi[i].onmouseout = function(){
+				if(aInput[this.index].checked == false){
+					aLi[this.index].style.backgroundColor = aLi[this.index].oldCol;
+				}
+			}
+		}
+		
+
+		for(var i=0;i<aInput.length;i++){
+			aInput[i].index = i;
+			aInput[i].onclick = function(){
+				var allMark = true;
+				if(this.checked){
+					aLi[this.index].style.backgroundColor = '#efefef';
+				}else{
+					aLi[this.index].style.backgroundColor = aLi[this.index].oldCol;
+				}
+				for(var i=0;i<aInput.length;i++){
+					if(aInput[i].checked == false){
+						allMark = false;
+					}
+					if(allMark){
+						oAllSel.checked = true;
+					}else{
+						oAllSel.checked = false;
+					}
+				}
+			}
+		}
+
+		oAllSel.onclick = function(){
+			if(this.checked){
+				for(var i=0;i<aInput.length;i++){
+					aInput[i].checked = true;
+					// for(var j=0;j<aLi.length;j++){
+						aLi[i].style.backgroundColor = '#efefef';
+					// }
+				}
+			}else{
+				for(var i=0;i<aInput.length;i++){
+					aInput[i].checked = false;
+					// for(var j=0;j<aLi.length;j++){
+						aLi[i].style.backgroundColor = aLi[i].oldCol;
+					// }
+				}
+			}
+		}
+
+	}
+  </script>
+ </head>
+ <body>
+	<div id="box">
+		<ul id="list">
+			<li><input type="checkbox" name="music" /> 私奔<span>梁博</span></li>
+			<li><input type="checkbox" name="music" /> 北京北京<span>梁博,黄勇</span></li>
+			<li><input type="checkbox" name="music" /> 我爱你中国<span>梁博</span></li>
+			<li><input type="checkbox" name="music" /> 花火<span>梁博</span></li>
+			<li><input type="checkbox" name="music" /> 回来<span>梁博</span></li>
+			<li><input type="checkbox" name="music" /> 爱要有你才完美<span>梁博</span></li>
+		</ul>
+		<div id="tool">
+			<input id="allSel" type="checkbox" /> 全选<button id="save">收藏</button><button id="add">添加</button><button id="del">删除</button>
+		</div>
+	</div>
+ </body>
+</html>

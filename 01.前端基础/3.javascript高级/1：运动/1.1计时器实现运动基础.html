@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width: 100px; height: 100px; background: red;margin-top: 10px;position: absolute;left: 0;top: 50px;}
+</style>
+<script>
+	var timer = null; //必须放在外面避免产生闭包
+	function startMove(){
+		var oDiv = document.getElementById('div1');
+		var speed = 1;
+		
+		clearInterval(timer); //先关后开，避免重复点击产生多个timer，速度越来越快
+		timer = setInterval(function(){
+			if(oDiv.offsetLeft>=300){
+				clearInterval(timer);
+			}else{
+				oDiv.style.left = oDiv.offsetLeft +speed+'px'; //必须放在else里面，否则会导致到达位置后再点击还会运动
+			}
+		},30);
+	}
+		
+</script>
+</head>
+
+<body>
+	<input type="button" value="开始运动" class="move" onclick="startMove()">
+	<div id="div1"></div>
+</body>
+</html>

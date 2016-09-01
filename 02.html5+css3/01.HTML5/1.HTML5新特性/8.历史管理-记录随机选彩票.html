@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+//触发历史管理 : 1.通过跳转页面  2.hash  3.pushState 
+// 通过hash实例来说明历史管理
+window.onload = function(){
+	var oInput = document.getElementById('input1');
+	var oDiv = document.getElementById('div1');
+	
+	var json = {};
+	
+	oInput.onclick = function(){
+		
+		var num = Math.random();
+		
+		var arr = randomNum(35,7);
+		 
+		json[num] = arr;
+		
+		oDiv.innerHTML = arr;
+		
+		window.location.hash = num;
+		
+	};
+	
+	window.onhashchange = function(){
+		
+		oDiv.innerHTML = json[window.location.hash.substring(1)];
+		
+	};
+	
+	function randomNum(iAll,iNow){
+		
+		var arr = [];
+		var newArr = [];
+		for(var i=1;i<=iAll;i++){
+			arr.push(i);
+		}
+		
+		for(var i=0;i<iNow;i++){
+			newArr.push( arr.splice( Math.floor(Math.random()*arr.length) ,1) );
+		}
+		
+		return newArr;
+		
+	}
+	
+};
+</script>
+</head>
+
+<body>
+<input type="button" value="随机选择" id="input1">
+<div id="div1"></div>
+历史管理
+onhashchange  ：改变hash值来管理
+
+
+history  ：(这里不做演示)
+服务器下运行
+pushState :  三个参数 ：数据  标题(都没实现)  地址(可选)
+popstate事件 :  读取数据   event.state
+注意：网址是虚假的，需在服务器指定对应页面，不然刷新找不到页面
+
+</body>
+</html>

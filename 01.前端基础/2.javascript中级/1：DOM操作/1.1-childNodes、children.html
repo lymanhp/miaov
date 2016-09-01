@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<script>
+	window.onload = function() {
+		
+		var oUl = document.getElementById('ul1');
+		
+		alert( '子节点长度：'+oUl.childNodes.length ); //标准下和非标准下结果不同
+		
+		console.log( 'ul节点类型：'+oUl.nodeType );
+		
+		console.log('第一个li节点类型：'+oUl.childNodes[0].nodeType);
+		
+		alert( 'ul第一个属性的name：'+oUl.attributes[0].name );
+		alert( 'ul第一个属性的节点类型：'+oUl.attributes[0].nodeType );
+
+		for (var i=0; i<oUl.childNodes.length; i++) {
+		
+			if ( oUl.childNodes[i].nodeType == 1 ) { //元素节点
+				oUl.childNodes[i].style.background = 'red'; 
+				//不进行判断节点类型为元素节点的话，标准模式下包含文本节点因为不能设置background而报错
+			}
+		}
+
+}
+</script>
+<body>
+	<ul id="ul1" style="border: 1px solid red;">
+        <li>11111 <span>span</span></li>
+        <li>22222</li>
+        <li>33333</li>
+        <li>44444</li>
+        <!-- 非法嵌套 -->
+        <p>55555</p>
+    </ul>
+    /*
+    	元素.childNodes : 只读 为属性 子节点集合:只包含第一代子节点，不包含后辈孙级以下的节点
+    		标准下：包含了文本和元素类型的节点，也会包含非法嵌套的子节点
+    		非标准下：只包含元素类型的节点，ie7以下不会包含非法嵌套子节点
+    	
+    	DOM节点的类型有很多种	12种
+    	
+    	元素.nodeType : 只读 属性 当前元素的节点类型
+    	
+    	元素节点nodeType	:	1
+    	属性节点nodeType	:	2
+    	文本节点 nodeType	:	3
+    */
+
+    <br><br><br>
+	/*
+		元素.children : 只读 属性 子节点集合
+		 和childNodes都是子节点集合
+			标准下：只包含元素类型的节点,会包含非法嵌套的子节点
+			非标准下：只包含元素类型的节点,ie7以下不会包含非法嵌套子节点
+	*/
+
+
+	<br><br><br>
+    /*
+    	属性
+		元素.attributes : 只读 属性 属性集合
+	*/	
+	
+	<br><br><br>
+	/*
+		nodeType应用：类型判断
+		for (var i=0; i<oUl.childNodes.length; i++) {
+			if ( oUl.childNodes[i].nodeType == 1 ) { //元素节点
+				oUl.childNodes[i].style.background = 'red'; //不进行判断节点类型为元素节点的话,标准模式下包含文本节点因为不能设置background而报错
+			}		
+		}
+	*/
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+新的表单特性和函数
+placeholder  :  输入框提示信息
+autocomplete  :  是否保存用户输入值
+默认为on，关闭提示选择off
+autofocus  :  指定表单获取输入焦点
+list和datalist  :  为输入框构造一个选择列表
+list值为datalist标签的id
+required  :  此项必填，不能为空
+Pattern : 正则验证  pattern="\d{1,5}"
+Formaction 在submit里定义提交地址
+
+
+<form action="http://www.baidu.com">
+	<input type="text" placeholder="请输入4-16个字符" name="user" autofocus required autocomplete="on" pattern="\d{1,5}" />
+	<input type="submit" value="提交" />
+    <input type="submit" value="保存至草稿箱" formaction="http://www.qq.com" />
+</form>
+</body>
+</html>

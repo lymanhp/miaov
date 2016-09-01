@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+window.onload = function() {
+	var oBtn = document.getElementById('btn');
+
+	oBtn.onclick = function() {
+
+		var xhr = null;
+		//兼容方式一
+		/*if (window.XMLHttpRequest) {
+			xhr = new XMLHttpRequest();
+		} else {
+			xhr = new ActiveXObject('Microsoft.XMLHTTP');
+		}*/
+		try {
+			// 代码尝试执行try中的内容，如果有错误，不会停止执行，而是会继续执行catch里面内容，并且传入错误信息e
+			xhr = new XMLHttpRequest(); //创建一个ajax对象
+		} catch (e) {
+			xhr = new ActiveXObject('Microsoft.XMLHTTP'); //ie6以下兼容
+		}
+		
+		xhr.open('get','1.txt',true); //设置
+		/*
+		open方法
+		参数
+			1.打开方式
+			2.地址
+			3.是否异步
+				true异步:非阻塞 前面的代码不会影响后面代码的执行
+				false同步:阻塞 前面的代码会影响后面代码的执行
+		*/
+		xhr.send(); //发送
+		
+	
+		//等待服务器返回内容
+		/*
+			readyState : ajax工作状态
+			responseText : ajax请求返回的内容就被存放到这个属性下面
+			on readystate change : 当readyState改变的时候触发
+			status : 服务器状态，http状态码
+		*/
+		xhr.onreadystatechange = function() {
+			
+			if ( xhr.readyState == 4 ) {
+				if ( xhr.status == 200 ) {
+					alert( xhr.responseText );
+				} else {
+					alert('出错了,Err：' + xhr.status);
+				}
+			}
+			
+		}
+		
+	}
+}
+</script>
+</head>
+
+<body>
+	<input type="button" value="按钮" id="btn" />
+</body>
+</html>

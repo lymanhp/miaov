@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+div{width: 100px; height: 50px; background: red;margin-top: 50px;}
+</style>
+<script>
+	window.onload = function(){
+		var oDiv = document.getElementsByTagName('div');
+		for(var i=0;i<oDiv.length;i++){
+			oDiv.timer = null; //通过自定义属性的方法，定义多个定时器，解决原来单定时器被清掉对多物体运动造成影响
+			oDiv[i].onmouseover = function(){
+				startMove(this,300);
+			}
+			oDiv[i].onmouseout = function(){
+				startMove(this,100);
+			}
+		}	
+	}
+	
+	// var timer = null;
+	function startMove(obj,iTarget){
+		// var oDiv1 = document.getElementById('div1');
+		clearInterval(obj.timer);
+		obj.timer = setInterval(function(){
+			var iSpeed = (iTarget - obj.offsetWidth)/8;
+			iSpeed = iSpeed > 0 ? Math.ceil(iSpeed):Math.floor(iSpeed);
+
+			if(obj.offsetWidth == iTarget){
+				clearInterval(obj.timer);
+			}else{
+				obj.style.width = obj.offsetWidth + iSpeed +'px';
+			}
+		},30)
+	}
+		
+</script>
+</head>
+
+<body>
+	<div id="div1"></div>
+	<div></div>
+	<div></div>
+</body>
+</html>

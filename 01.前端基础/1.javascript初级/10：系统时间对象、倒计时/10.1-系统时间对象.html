@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<script>
+
+/*
+	系统时间对象
+*/
+	console.log( new Date() );		// 当前系统的时间对象(本地电脑)
+
+window.onload = function () {
+
+	var oBody = document.body;
+	
+	// 计时器让时间函数每一秒刷新一次 否则需要手动刷新浏览器页面显示时间才会改变
+	// 实质上是每秒执行oBody.innerHTML = str;向里面添加内容
+	setInterval( fnTime, 1000 );
+	
+	//需要一开始就执行oBody.innerHTML = str;
+	fnTime ();
+	
+	function fnTime () {
+		//数据类型typeof为object
+		var myTime = new Date();
+		
+		// 数据类型typeof为number
+		var iYear = myTime.getFullYear();
+		var iMonth = myTime.getMonth()+1;  //从0开始，要加1
+		var iDate = myTime.getDate();
+		var iWeek = myTime.getDay();
+		var iHours = myTime.getHours();
+		var iMin = myTime.getMinutes();
+		var iSec = myTime.getSeconds();
+		var str = '';
+
+		//iWeek数据类型为number,转化成星期的模式
+		if( iWeek === 0 ) iWeek = '星期日';
+		if( iWeek === 1 ) iWeek = '星期一';
+		if( iWeek === 2 ) iWeek = '星期二';
+		if( iWeek === 3 ) iWeek = '星期三';
+		if( iWeek === 4 ) iWeek = '星期四';
+		if( iWeek === 5 ) iWeek = '星期五';
+		if( iWeek === 6 ) iWeek = '星期六';
+		
+		str = iYear+ '年' +iMonth+'月'+iDate+'日 '+iWeek+' '+ toTwo(iHours)+' : '+ toTwo(iMin)+' : '+ toTwo(iSec);
+		
+		oBody.innerHTML = str;
+	
+	}
+};
+
+	console.log( toTwo(5) );	// '05'
+	console.log( toTwo(15) );	// '15'
+// 将小于10的数前面加上0的封装函数
+function toTwo ( n ) {
+	return n < 10 ?  '0' + n : '' + n;
+}
+
+</script>
+
+</head>
+
+<body style="font-size:30px;">
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<script>
+var arr = [ 1,2,3,4,5,6,7,8 ];
+
+arr.sort(function ( a, b ) {
+	return Math.random() - 0.5;   //Math.random()取0-1之间的随机数,然后-0.5,当返回值大于0的时候交换两数位置,小于0时不交换
+});
+alert( arr );
+
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

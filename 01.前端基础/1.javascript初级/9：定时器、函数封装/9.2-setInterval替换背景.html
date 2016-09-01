@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<input type="button" value="换背景"/>
+<input type="button" value="停" />
+
+<script>
+window.onload = function(){
+	var aButton = document.getElementsByTagName('input');
+	var arrUrl = ['img/1.jpg','img/2.jpg','img/3.jpg'];
+	var i = 0;
+	var timer = null;
+
+	document.body.style.background = 'url('+arrUrl[1]+')';
+	document.body.style.backgroundRepeat = 'no-repeat';
+
+	aButton[0].onclick = function(){
+		clearInterval( timer );			//先关后开,清除再次点击按钮产生的定时器效果
+		timer = setInterval(function(){
+			document.body.style.background = 'url('+arrUrl[i]+')';
+			document.body.style.backgroundRepeat = 'no-repeat';
+			i++;
+			i%= arrUrl.length;
+		},1000);
+	}
+
+	aButton[1].onclick = function(){
+		clearInterval(timer);
+	}
+}
+
+</script>
+
+</body>
+</html>

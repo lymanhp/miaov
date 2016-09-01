@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+window.onload = function() {
+
+	//onsubmit : 当表单被提交的时候触发 return false提交不了
+	//onreset : 当表单要重置的时候触发	return false重置不了
+	
+	var oForm = document.getElementById('form1');
+	
+	oForm.onsubmit = function() {
+		
+		if (this.username.value == '') {
+			alert('请填写用户名');
+			return false; //提交不了
+		}
+		
+	}
+	
+	
+	oForm.onreset = function() {
+	
+		//confirm('你确定要重置？'); 有确认和取消按钮的弹出框,点确定返回值为true,点取消返回值为false
+		
+		/*if ( confirm('你确定要重置？') ) {
+			return true; //重置
+		} else {
+			return false; //不能重置
+		}*/
+		
+		return confirm('你确定要重置？'); //if else的改写
+		
+	}
+	
+}
+</script>
+</head>
+
+<body>
+	<!-- action提交地址 -->
+	<form id="form1" action="http://www.baidu.com">
+    	<input type="text" name="username" />
+        <input type="password" name="password" />
+        <!--<input type="button" value="提交" />-->
+        <input type="submit" value="提交" />
+        <input type="reset" value="重置" />
+    </form>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<style>
+li { list-style:none; width:114px; height:140px; background:url(img/normal.png); float:left; margin-right:20px; cursor:pointer;}
+</style>
+
+<script>
+window.onload = function(){
+   var aBtn = document.getElementsByTagName('input');
+   var aP = document.getElementsByTagName('p');
+   var arr = ['毛雪松','周洋','王开贵'];
+   for(var i=0;i<aBtn.length;i++){
+      aBtn[i].index = i  //给每个按钮加上index属性作为索引值
+      aBtn[i].onclick = function(){
+         this.value = arr[this.index];
+         aP[this.index].innerHTML = arr[this.index];
+      };
+   }
+};
+
+</script>
+</head>
+
+<body>
+<input type="button" value="btn1" />
+<input type="button" value="btn2" />
+<input type="button" value="btn3" />
+<p>a</p>
+<p>b</p>
+<p>c</p>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<!--
+sort()进行数组排序
+-->
+<script>
+// 字符串排序
+var arr = [ 'c', 'd', 'a', 'e' ];
+arr.sort();
+alert( arr );
+
+
+// 数字排序
+var arr2 = [ 4,3,5,5,76,2,0,8 ];
+arr2.sort(); //直接用sort()不能进行数字的正确排序，需要改写
+alert( arr2 );
+
+arr2.sort(function ( a, b ) {
+	return a - b; //返回值大于0时交换两个数字的位置，实现从小到大排序;若return b - a从大到小排序
+});
+
+
+// 其他排序
+var arrWidth = [ '345px', '23px', '10px', '1000px' ];
+
+arrWidth.sort(function ( a, b ) {
+	return parseInt(a) - parseInt(b); //只是进行比较，然后改变数组的排序，不会改变数组里面内容
+});
+
+alert( arrWidth );
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

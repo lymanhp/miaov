@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+div{width: 100px; height: 100px; background: red;margin-top: 20px;opacity: 0.3;filter: alpha(opacity=30);}
+</style>
+<script>
+	window.onload = function(){
+		var aDiv = document.getElementsByTagName('div');
+		for(var i=0;i<aDiv.length;i++){
+			aDiv[i].alpha = 30;  //给每个div自定义属性alpha,并且通过obj.alpha传值
+			aDiv[i].onmouseover = function(){
+				startMove(this,100);
+			}
+			aDiv[i].onmouseout = function(){
+				startMove(this,30);
+			}
+		}
+	}
+	
+	// var alpha = 30; //alpha必须为全局变量
+	function startMove(obj,iTarget){
+		clearInterval(obj.timer);
+		obj.timer = setInterval(function(){
+			var iSpeed = (iTarget - obj.alpha)/8;
+			iSpeed = iSpeed>0?Math.ceil(iSpeed):Math.floor(iSpeed);
+
+			if(obj.alpha == iTarget){
+				clearInterval(obj.timer);
+			}else{
+				obj.alpha += iSpeed;
+				obj.style.filter = 'alpha(opacity:'+obj.alpha+')';
+				obj.style.opacity = obj.alpha/100;
+			}
+		},30)
+	}
+</script>
+</head>
+
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+</body>
+</html>

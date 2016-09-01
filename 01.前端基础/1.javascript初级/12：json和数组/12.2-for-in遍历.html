@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+// for in遍历json
+var json4 = { 'name' : 'miaov', 'age' : 3, 'fun' : '前端开发'  };
+for ( var attr in json4  ) {
+	console.log( attr );        //遍历键名
+	console.log( json4[attr] ); //遍历键值
+}
+
+
+var json5 = {
+	'url' : [ 'img/1.png', 'img/2.png', 'img/3.png', 'img/4.png' ],
+	'text' : [ '小宠物', '图片二', '图片三', '面具' ]
+};
+
+for ( var attr in json5 ) {
+	console.log(attr);	//遍历键名
+	for ( var i=0; i < json5[attr].length; i++ ) {
+		console.log(json5[attr][i]);	//遍历键值
+	}
+}
+
+// for in遍历对象属性
+var str = '';
+for(var i in window){
+	str += i +':' + document[attr] +'<br />';
+}
+document.body.innerHTML =str;
+
+// for in遍历数组
+var arr = [1,2,3];
+for(var i in arr){
+	alert(arr[i]);
+}
+</script>
+
+</body>
+</html>

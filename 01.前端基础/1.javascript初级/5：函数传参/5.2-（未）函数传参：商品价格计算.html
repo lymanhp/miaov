@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<style>
+
+</style>
+
+<script>
+window.onload = function(){
+    var oList = document.getElementById('list');
+    var aLi = oList.getElementsByTagName('li');
+
+    function fnCount(oLi){
+        var aInp = oLi.getElementsByTagName('input');
+        var oStrong = oLi.getElementsByTagName('strong')[0];
+        var oEm = oLi.getElementsByTagName('em')[0];
+        var oSpan = oLi.getElementsByTagName('span')[0];
+        var n1 = parseInt(oStrong.innerHTML); //获取初始值，并将获取的字符串转化为数字
+        var price = parseFloat(oEm.innerHTML);    //获取单价
+           //商品总计
+        var oSum = document.getElementById('sum');
+        var oSStrong = oSum.getElementsByTagName('strong')[0];
+        var oSSpan =oSum.getElementsByTagName('span')[0];
+
+
+        aInp[1].onclick = function(){
+            n1++;
+            oAmount++;
+            oStrong.innerHTML = n1;
+            oSpan.innerHTML = n1*price;
+            oPrice+=price;
+            calcum();
+        };
+        aInp[0].onclick = function(){
+            n1--;
+            if(n1>=0){
+                oStrong.innerHTML = n1;
+                oSpan.innerHTML = n1*price;
+            }
+            else{
+                n1=0; //重置
+            }
+        };
+    };
+    /*函数参数
+    fnCount(aLi[0]);
+    fnCount(aLi[1]);
+    ali很多时候，用下面循环实现*/
+    for(var i=0; i<aLi.length;i++){
+        fnCount(aLi[i]);
+    }
+
+    function calcum(){
+            sSum.innerHTML="商品合计共："+oAmount+'件，共花费了：'+oPrice+"元";  }
+    }
+};
+</script>
+</head>
+
+<body>
+
+<ul id="list">
+    <li>
+        <input type="button" value="-" />
+        <strong>0</strong>
+        <input type="button" value="+" />
+        单价：<em>12.5元</em>
+        小计：<span>0元</span>
+    </li>
+    <li>
+        <input type="button" value="-" />
+        <strong>0</strong>
+        <input type="button" value="+" />
+        单价：<em>10.5元</em>
+        小计：<span>0元</span>
+    </li>
+</ul>
+<p id="sum">
+   <!--  商品合计共：<strong>0</strong>件，共花费了：<span>0</span>元 -->
+</p>
+
+</body>
+</html>

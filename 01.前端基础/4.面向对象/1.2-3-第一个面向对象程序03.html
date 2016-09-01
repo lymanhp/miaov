@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+function CreatPerson(name,sex){
+	// 属性每个对象都各不相同，所以用构造函数加属性
+	this.name=name;
+	this.sex=sex;
+}
+//方法所有对象都共用的，所以用原型加方法
+CreatPerson.prototype.showName = function(){ //用prototype给类CreatPerson(或构造函数)添加方法，其对象可以使用该方法
+	alert('我的名字叫:'+this.name);
+}
+CreatPerson.prototype.showSex = function(){
+	alert('我的性别:'+this.sex);
+}
+
+var p1 = new CreatPerson('Jack','男'); //函数前面有new的时候，this指向新创建的对象(自动创建)
+var p2 = new CreatPerson('Rose','女');
+p1.showName();
+p1.showSex();
+p2.showName();
+p2.showSex();
+
+alert(p1.showName == p2.showName); //为真，说明所有对象都共用一个函数，解决每个对象都有一套自己的函数，浪费资源问题
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

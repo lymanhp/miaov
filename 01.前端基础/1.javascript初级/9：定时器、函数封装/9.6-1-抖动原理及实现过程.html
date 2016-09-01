@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+img { position:absolute; top:200px; left:300px; width:180px;height: 180px; }
+</style>
+
+<script src="miaov.js"></script>
+<script>
+window.onload = function(){
+	var oImg1 = document.getElementById('img1');
+	var arr = [];
+	var num = 0;
+	var timer = null;
+
+	for(var i=20;i>0;i-=2){
+		arr.push(i,-i);  //20 -20,18 -18,.....,2,-2
+	}
+	arr.push(0);
+	// console.log(arr);
+
+	var pos = parseInt(getStyle(oImg1,'left'));
+	oImg1.onclick = function(){
+		clearInterval(timer);
+		timer = setInterval(function(){
+			// console.log(this);
+			// console.log(num);
+			// console.log(arr[num]);
+			oImg1.style.left = pos + arr[num] + 'px';
+			num++;
+			if(num == arr.length){
+				clearInterval(timer);
+				num = 0;
+			}
+		},50);
+	};
+}
+
+/*法二有bug
+window.onload = function(){
+	var oImg1 = document.getElementById('img1');
+	var arr = [];
+	var num = 0;
+	var timer = null;
+
+oImg1.onclick = function(){
+	clearInterval(timer);
+	for(var i=20;i>0;i-=2){
+		arr.push(i,-i);  //20 -20,18 -18,.....,2,-2
+	}
+	arr.push(0);
+	// console.log(arr);
+
+	var pos = parseInt(getStyle(oImg1,'left'));
+	
+	
+	timer = setInterval(function(){
+		// console.log(this);
+		// console.log(num);
+		// console.log(arr[num]);
+		oImg1.style.left = pos + arr[num] + 'px';
+		num++;
+		if(num == arr.length){
+			clearInterval(timer);
+			// num = 0;
+		}
+	},50);
+};
+}
+*/
+</script>
+
+</head>
+
+<body>
+
+<img id="img1" src="img/1.jpg" />
+</body>
+</html>

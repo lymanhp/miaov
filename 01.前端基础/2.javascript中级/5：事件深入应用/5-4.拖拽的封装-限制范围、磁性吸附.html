@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width: 100px; height: 100px; background: red; position: absolute;}
+#img1 { position: absolute;}
+</style>
+<script>
+window.onload = function() {
+	
+	var oDiv = document.getElementById('div1');
+	var oImg = document.getElementById('img1');
+	
+	drag(oImg);
+	
+	drag(oDiv);
+	
+	function drag(obj) {
+		
+		obj.onmousedown = function(ev) {
+			var ev = ev || event;
+			
+			var disX = ev.clientX - this.offsetLeft;
+			var disY = ev.clientY - this.offsetTop;
+			
+			if ( obj.setCapture ) {
+				obj.setCapture();
+			}
+			
+			document.onmousemove = function(ev) {
+				var ev = ev || event;
+				
+				var L = ev.clientX - disX;
+				var T = ev.clientY - disY;
+				
+				if ( L < 100 ) {  //对范围进行判断，左边不能超过0，右边不能超过可视区域的宽-obj的宽
+								  //将L < 0 改为 L < 100 磁性吸附
+					L = 0;
+				} else if ( L > document.documentElement.clientWidth - obj.offsetWidth ) {
+					L = document.documentElement.clientWidth - obj.offsetWidth;
+				}
+				
+				if ( T < 0 ) { //对范围进行判断，上面不能超过0，下面不能超过可视区域的高-obj的高
+					T = 0;
+				} else if ( T > document.documentElement.clientHeight - obj.offsetHeight ) {
+					T = document.documentElement.clientHeight - obj.offsetHeight;
+				}
+				
+				//范围判断后赋值，不会超出浏览器的边
+				obj.style.left = L + 'px';
+				obj.style.top = T + 'px';
+				
+			}
+			
+			document.onmouseup = function() {
+				document.onmousemove = document.onmouseup = null;
+				if ( obj.releaseCapture ) {
+					obj.releaseCapture();
+				}
+			}
+			
+			return false;
+			
+		}
+		
+	}
+	
+}
+</script>
+</head>
+
+<body>
+	<div id="div1"></div>
+    <img src="1.jpg" id="img1" />
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<!--
+1.定义json:
+var json = { '自定义命名' : '数据类型'}
+
+数据类型可以是数字,字符串,数组,对象,null
+访问:json.'自定义命名'
+
+
+2.json结构：
+对象和数组两种结构
+-->
+<script>
+// 1.
+var arrUrl = ['img/1.png','img/2.png','img/3.png'];
+var arrText = ['小宠物','景物','动物'];
+
+// 数组转化为json
+var imgData = {
+	'url':['img/1.png','img/2.png','img/3.png'],
+	'text' :['小宠物','景物','动物']
+};
+
+alert(imgData.url); //访问整个数组
+alert(imgData.url[0]); //访问数组中第一个
+
+
+// 2.
+// json结构2：数组包json
+var arr = [{'url':'img/1.png','text':'小宠物'},{'url':'img/2.png','text':'景物'},{'url':'img/3.png','text':'动物'}];
+
+// 访问：像访问数组一样访问
+alert(arr[0]);   //对象
+alert(arr[0].url);
+
+
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

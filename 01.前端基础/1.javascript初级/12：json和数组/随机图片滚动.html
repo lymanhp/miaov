@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)http://fantaghiro.github.io/miaov/JS_Basic_Lessons/12-1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<title>随机图片滚动</title>
+	<style>
+		html, body, ul {
+			margin: 0;
+			padding: 0;
+		}
+		li {
+			list-style: none;
+		}
+		ul {
+			width: 220px;
+			margin: 50px auto;
+		}
+		li {
+			display: inline-block;
+			width: 100px;
+			height: 50px;
+			font-size: 0;
+			overflow: hidden;
+			position: relative;
+		}
+		div {
+			position: absolute;
+			top: 0px;
+			left: 0;
+		}
+	</style>
+	<script src="./img/miaov.js"></script>
+	<script>
+		window.onload = function(){
+			var aLi = document.getElementsByTagName('li');
+				target = 0;
+
+			for(var i=0;i<aLi.length;i++){
+				fnSlide(aLi[i]);  //函数复用 用循环实现
+			}
+			function fnSlide(li){
+				var aDiv = li.getElementsByTagName('div')[0];
+				function fnSlideOnce(li){
+					setTimeout(function(){
+						target = target == 0 ? -50 : 0;
+						doMove(aDiv,'top',10,target,fnSlideOnce);  //添加回调函数一直执行
+					},Math.round( Math.random()*9000 + 1000 ));  //随机秒数，每一个的每两个图片随机秒数都不一样
+				}
+				fnSlideOnce();	//只执行一次
+			}
+		}
+	</script>
+</head>
+<body>
+	<ul>
+		<li>
+			<div><img src="./img/1.jpg"><img src="./img/2.jpg"></div>
+		</li>
+		<li>
+			<div><img src="./img/3.jpg"><img src="./img/4.jpg"></div>
+		</li>
+		<li>
+			<div><img src="./img/5.jpg"><img src="./img/6.jpg"></div>
+		</li>
+		<li>
+			<div><img src="./img/7.jpg"><img src="./img/8.jpg"></div>
+		</li>
+		<li>
+			<div><img src="./img/9.jpg"><img src="./img/10.jpg"></div>
+		</li>
+		<li>
+			<div><img src="./img/11.jpg"><img src="./img/12.jpg"></div>
+		</li>
+		<li>
+			<div><img src="./img/13.jpg"><img src="./img/14.jpg"></div>
+		</li>
+		<li>
+			<div><img src="./img/15.jpg"><img src="./img/16.jpg"></div>
+		</li>
+	</ul>
+
+</body></html>

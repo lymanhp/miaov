@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>json面向对象</title>
+
+    <script type="text/javascript">
+        var p1 = {
+            name:'Jack',
+            showName:function(){
+                alert('我的名字：'+this.name);  //json里面可以有函数，可以通过this来访问其他json
+            }
+        }
+
+        p1.showName(); //json方式的面向对象，简单，但是不适用多个对象
+    </script>
+ 
+</head>
+<body>
+ 
+</body>
+</html>

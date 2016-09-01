@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+img { position:absolute; top:200px; left:300px; width:180px; }
+#img1 { left:100px; }
+</style>
+
+<!-- <script src="miaov.js"></script> -->
+<script>
+window.onload = function(){
+	var oImg1 = document.getElementById('img1');
+	var oImg2 = document.getElementById('img2');
+
+	oImg1.onmouseover = shakeEvent;
+	oImg2.onmouseover = shakeEvent;
+
+// 调用函数封装
+	function shakeEvent(){
+		var _this = this; //把this存起来
+		shake(_this,'left',function(){
+			// console.log(this); this指代window
+			shake(_this,'top');
+		});
+	}
+};
+
+// 抖动函数封装	
+function shake(obj,attr,endFn){
+	// 修复抖函数
+	if ( obj.onOff ) return;
+	obj.onOff = true; //为真时不执行下面
+	// console.log(obj.onOff);
+
+	var arr = [];
+	var num = 0;
+	// var timer = null;
+
+	for(var i=20;i>0;i-=2){
+		arr.push(i,-i);  //20 -20,18 -18,.....,2,-2
+	}
+	arr.push(0);
+
+	var pos = parseInt(getStyle(obj,attr)); //这里造成抖函数bug
+
+	// obj.onclick = function(){
+		clearInterval(obj.timer);
+		obj.timer = setInterval(function(){
+			obj.style[attr] = pos + arr[num] + 'px';
+			num++;
+			if(num === arr.length){
+				clearInterval(obj.timer);
+				obj.onOff = false;
+				// console.log(obj.onOff);
+				endFn && endFn();
+			}
+		},50);
+	// };
+}
+function getStyle ( obj, attr ) { return obj.currentStyle?obj.currentStyle[attr] : getComputedStyle( obj )[attr]; }
+
+</script>
+
+</head>
+
+<body>
+
+<img id="img1" src="img/1.jpg" />
+<img id="img2" src="img/2.jpg" />
+
+</body>
+</html>

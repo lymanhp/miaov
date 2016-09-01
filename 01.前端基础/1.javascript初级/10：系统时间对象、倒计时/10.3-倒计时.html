@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<script>
+function CountDown(){
+	// 现在的时间点（在变）
+	// 未来的时间点（不变）
+	var iNow = new Date();
+	var iNew = new Date( 2016, 10, 27, 21,56,0 );
+	/* new Date()传参设置未来时间点的两种形式
+	   数字形式：new Date( 2013,4,1,9,48,12 );
+	   字符串形式：new Date('June 10,2013 12:12:12');
+	 */
+
+	var t = Math.floor((iNew - iNow)/1000);  
+	//Math.floor向下取整，将秒后面的小数去掉
+	console.log(t); 
+	//单位秒
+
+	var str = toTwo(Math.floor(t/86400))+'天'+toTwo(Math.floor(t%86400/3600))+'时'+toTwo(Math.floor(t%86400%3600/60))+'分'+toTwo(t%60)+'秒';
+	document.body.innerHTML = str;
+	/* 将时间对象t转换成
+	   天：Math.floor(t/86400)
+	   时：Math.floor(t%86400/3600)
+	   分：Math.floor(t%86400%3600/60)
+	   秒：t%60
+	*/
+}
+
+// 将小于10的数前面加上0的封装函数
+function toTwo ( n ) {
+	return n < 10 ?  '0' + n : '' + n;
+}
+
+window.onload = function(){
+	setInterval(CountDown,1000);
+	CountDown();
+}
+
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<style>
+li { list-style:none; width:114px; height:140px; background:url(img/normal.png); float:left; margin-right:20px; cursor:pointer;}
+</style>
+
+<script>
+window.onload = function (){
+   var aBtn = document.getElementsByTagName('input');
+   var arr = [ 'A', 'B', 'C', 'D' ];
+   
+   for( var i=0; i<aBtn.length; i++ ){
+      aBtn[i].num = 0; //取初值：将每个按钮的自定义属性num置为0
+      aBtn[i].onclick = function (){
+         this.value = arr[this.num];
+         this.num++; //对应的num值自增
+         if(this.num===arr.length){
+            this.num = 0;
+         }
+      };
+   }
+};
+</script>
+</head>
+
+<body>
+<input type="button" value="0" />
+<input type="button" value="0" />
+<input type="button" value="0" />
+</body>
+</html>

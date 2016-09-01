@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+/*
+var i = 0;
+i++;
+if( i === 5 ){
+	i = 0;
+}
+i%=5;相当于上面的if语句
+*/
+
+// 取模变色js
+window.onload = function(){
+	var oUl1 = document.getElementById('ul1');
+	var aLi = oUl1.getElementsByTagName('li');
+	var arr = ['pink','orange','green'];  //用数组存储颜色
+
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].style.backgroundColor = arr[i%arr.length]; //取模变色
+		aLi[i].index = i;
+		   // 每个li鼠标移入移出事件
+		aLi[i].onmouseover = function(){
+			this.style.backgroundColor = 'gray';
+		};
+		aLi[i].onmouseout = function(){
+			this.style.backgroundColor = arr[this.index%arr.length]; // 这里面的i为全局变量中i，不能用arr[i%arr.length];
+		};
+	}
+};
+</script>
+<style>
+li { height:20px; margin-bottom:5px; list-style:none; }
+</style>
+</head>
+
+<body>
+
+<ul id="ul1">
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+
+</body>
+</html>
+<style>
+li { height:20px; margin-bottom:5px; list-style:none; }
+</style>
+</head>
+
+<body>
+
+<ul id="ul1">
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+
+</body>
+</html>

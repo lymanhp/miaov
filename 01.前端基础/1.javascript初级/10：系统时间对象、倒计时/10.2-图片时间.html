@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<script>
+
+window.onload = function () {
+	var oBody = document.body;
+	var oP = document.getElementById('time');
+	var aImg = document.getElementsByTagName('img');
+	
+	setInterval( fnTime, 1000 );
+	
+	fnTime ();
+	
+	function fnTime () {
+		//数据类型typeof为object
+		var myTime = new Date();
+		
+		// 数据类型typeof为number
+		var iHours = myTime.getHours();
+		var iMin = myTime.getMinutes();
+		var iSec = myTime.getSeconds();
+		var str = '';
+
+		str = toTwo(iHours) + toTwo(iMin) + toTwo(iSec);
+		oP.innerHTML = str;
+
+		// 图片时间：
+		for(var i=0;i<=5;i++){
+			aImg[i].src = 'img/'+str.charAt(i)+'.JPG';
+			/* charAt返回指定位置的字符
+			str = '214204';
+			str.charAt(5) 为 4
+			aImg[5].src = 'img/' + str.charAt(5) + '.JPG';
+			*/
+		}
+	}
+};
+
+// 将小于10的数前面加上0的封装函数
+function toTwo ( n ) {
+	return n < 10 ?  '0' + n : '' + n;
+}
+</script>
+
+</head>
+
+<body>
+<p id="time" style="font-size:60px;"></p>
+<img src="img/0.JPG" />
+<img src="img/0.JPG" />
+<img src="img/0.JPG" />
+<img src="img/0.JPG" />
+<img src="img/0.JPG" />
+<img src="img/0.JPG" />
+</body>
+</html>

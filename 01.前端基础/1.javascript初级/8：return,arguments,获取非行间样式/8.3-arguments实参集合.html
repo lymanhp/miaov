@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<script>
+/*1.实参的集合arguments*/
+fn1( 1,2,3 );					// 实参——实际传递的参数
+// function fn1( a,b,c ){		// 形参——形式上的参数
+function fn1(){
+	// arguments   => 实参的集合  ——[ 1,2,3 ]  
+	// alert( arguments );      =>object arguments
+	// alert( arguments.length );=>3
+	// alert( arguments[arguments.length-1] ); =>找到最后一个参数
+}
+
+/*2. 形参可以没有，当函数的参数个数无法确定的时候：用 arguments*/
+// alert( sum( 1,2,3 ) );			// 结果6
+// alert( sum( 1,2,3,4 ) );			// 结果10
+function sum (){
+	var n = 0;
+	for( var i=0; i<arguments.length; i++ ){
+		n += arguments[i];
+	}
+	return n;
+}
+
+/*3.arguments与作用域*/
+var a = 1;
+function fn2( a ){
+	arguments[0] = 3;
+	alert(a);												// 3
+	var a = 2;
+	alert( arguments[0] );	// 2
+}
+fn2(a);
+alert(a);													// 1				 	
+/*解析：
+arguments[0]相当于实参a,因为只有一个实参，所以下标为0表示实参a
+然后其值可以被修改
+*/
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+#img{filter: alpha(opacity=100);opacity: 1;}
+</style>
+<script>
+var timer = null;
+var alpha = 100;  //初始化透明度，用一个变量代替offsetLeft
+function startMove(iTarget){
+	var oImg = document.getElementById('img');
+	
+	var iSpeed = 0;
+
+	//速度自动判断
+	if(alpha < iTarget){  //这里用alpha代替offsetLeft
+		iSpeed = 10;
+	}else{
+		iSpeed = -10;
+	}
+	clearInterval(timer);
+	timer = setInterval(function(){
+		if(alpha == iTarget){
+			clearInterval(timer);
+		}else{
+			alpha = alpha+iSpeed;
+			oImg.style.filter = 'alpha(opacity:'+alpha+')';
+			oImg.style.opacity = alpha/100;
+		}
+	},20)
+}
+
+window.onload = function(){
+	var oImg = document.getElementById('img');
+	oImg.onmouseover = function(){
+		startMove(80);
+	}
+	oImg.onmouseout = function(){
+		startMove(100);
+	}
+}
+</script>
+</head>
+
+<body>
+	<img src="1.jpg" id="img">
+</body>
+</html>

@@ -1,0 +1,95 @@
+﻿<!--
+    分析: UL 里面放 背景图 (星星未选择的状态)  再放5个LI  将星星的位置框起来
+    鼠标移入星星的时候 就移入了LI 上面   ..
+    判断是移入的哪一个LI   就对应更换 UL的背景图
+    当点击LI的时候  背景图 固定
+    当输入移动到其他的 LI 时候 背景图还是可以更换 但是只要鼠标没有 点击LI
+    只要鼠标移开 UL 就会 切换到之前固定的背景图
+    0px
+    -21px
+    -42px
+    -63px
+    -84px
+    -104px
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>百度文库评分</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        #ul1{width: 121px; height:21px;background: url("imgs/2.png") no-repeat 0 0 ;}
+        #ul1 li{list-style: none;float: left; width: 24px; height:21px;text-align: center;}
+
+
+        #box{border:1px solid #000;width:494px;  /*--500px--*/height:40px;  /*--60px--*/
+            padding:20px 0 0 6px;position:relative;}
+        #p{float:left;font-size:16px;height:21px;line-height:21px;font-family:'宋体';font-weight:bold;}
+        p span{color:red;}
+        #span1{width: 80px; height: 21px; line-height: 21px; text-align: left;text-indent: 10px;
+            color:#ef7300;font-weight:bold;}
+        #tip{border:1px solid #dedeb5;width:234px;height:38px;position:absolute;top:10px;right:33px;
+        background:#ffffe7 url('imgs/tip.gif') no-repeat 150px 14px;}
+        #tip span{display:block;width:5px;height:7px;overflow:hidden;background:url('imgs/san.gif') no-repeat;
+            position:absolute;top:16px;left:-5px;}
+        #tip p{font-size:12px;color:#94948c;
+            position:absolute;top:14px;left:7px;}
+        
+        .left{float: left;}
+    </style>
+    <script>
+        window.onload = function(){
+            var oUl = document.getElementById('ul1');
+            var aLi = oUl.getElementsByTagName('li');
+            var arrPos_y = ['-21px','-42px','-63px','-84px','-104px'];
+            var arrText = ['很差','较差','一般','很好','超好'];
+            var oSpan = document.getElementById('span1');
+            
+            var Pos_xy = '';    //保存的是鼠标点击时候的坐标位置
+            var Text_judge = '';//保存的评价
+            for(var i=0;i<aLi.length;i++){
+                aLi[i].index = i;
+                aLi[i].onmouseover = function(){
+                    oUl.style.backgroundPosition = '0'+arrPos_y[this.index];
+                    oSpan.innerHTML = arrText[this.index];
+                }
+                aLi[i].onclick = function(){
+                    Pos_xy = '0'+arrPos_y[this.index];//保存的鼠标点击时候的坐标位置到全局变量中
+                    Text_judge =arrText[this.index];  //保存评价
+                };
+                aLi[i].onmouseout = function(){
+                    oUl.style.backgroundPosition = Pos_xy;
+                    oSpan.innerHTML = Text_judge;
+                };
+            }
+
+            var oTip = document.getElementById('tip');
+            oUl.onmouseover = function(){
+                oTip.style.display = 'none';
+            };
+             oUl.onmouseout = function(){
+                // 当li没有被点击的时候,鼠标移开应该显示提示tip
+                if(!Pos_xy){
+                    oTip.style.display = 'block';
+                }
+            };
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <p id='p'><span>*</span>总体评价:</p>
+        <ul id="ul1" class="left">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <span id="span1" class="left"></span>
+        <div id="tip">
+          <span></span><p>小提示:点击星星就能打分</p>
+       </div>
+    </div>
+</body>
+</html>

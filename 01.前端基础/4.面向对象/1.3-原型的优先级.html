@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+Array.prototype.a = 12;
+var arr = [1,2,3];
+alert('这是原型构造添加的属性'+arr.a);  //12 相当于class
+
+arr.a = 5;
+alert('这是直接添加的属性'+arr.a); //5 相当于行间样式，比原型优先级高
+
+delete arr.a;
+alert('原型构造添加的属性还在'+arr.a); //12
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

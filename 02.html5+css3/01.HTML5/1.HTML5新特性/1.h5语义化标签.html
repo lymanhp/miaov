@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+
+<header>用在页面的头部或者版块的头部</header>
+<!-- <hgroup></hgroup>标题组合 -->
+<hgroup>
+	<h1>妙味课堂</h1>
+	<h2>带您进入富有人情味的IT培训</h2>
+</hgroup>
+<nav>导航</nav>
+
+<!-- 内容部分 -->
+<section>页面上的版块。用于划分页面上的不同区域,或者划分文章里不同的节</section>
+<article>表示一套结构完整且独立的内容部分。可以是一个帖子，杂志或报纸中的一篇文章，一篇博客，用户提交的评论内容，可互动的页面模块挂件等。</article>
+<!-- <article>主体</article> -->
+<aside>和主体相关的附属信息</aside>
+
+<!-- 媒体元素 -->
+<figure></figure>用于对元素进行组合。一般用于图片或视频
+<figcaption></figcaption>figure的子元素 用于对figure的内容进行说明
+<!-- figure例子： -->
+<figure>
+	<img />
+    <figcaption>妙味课堂</figcaption>
+</figure>
+
+<time></time>用来表现时间或日期
+
+<datalist></datalist>选项列表。与 input 元素配合使用，来定义 input 可能的值。
+<!-- datalist例子 -->
+<input type="text" list="valList" /> <!-- input的list属性值对应datalist的id值 -->
+<datalist id="valList">
+	<option value="javascript">javascript</option>
+	<option value="html">html</option>
+	<option value="css">css</option>
+</datalist>
+
+<details></details>用于描述文档或文档某个部分的细节，加上open属性则会展开，默认显示为详细信息;加上summary则设置摘要
+<!-- details例子 -->
+<details open>
+    <summary>妙味课堂</summary>
+    <p>国内知名的IT培训机构</p>
+</details>
+
+<!-- 对话 -->
+<dialog></dialog>定义一段对话
+<!-- dialog例子 -->
+<dialog open>
+  <dt>老师</dt>
+  <dd>2+2 等于？</dd>
+  <dt>学生</dt>
+  <dd>4</dd>
+</dialog>
+
+<address></address> 定义文章或页面作者的详细联系信息
+<address>作者信息</address>
+
+<mark>标记</mark>
+
+<!-- 进度条 -->
+<progress></progress>定义进度条
+<!-- 例子 -->
+<progress max="100" value="76"></progress>
+<!-- max为长度，value为进度值 -->
+
+<br><br><br>
+<footer>用在页面的头部或者版块的底部</footer>
+</body>
+</html>

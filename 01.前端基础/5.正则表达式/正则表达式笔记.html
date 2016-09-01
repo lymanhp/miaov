@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+</head>
+
+<body>
+RegExp对象：
+js风格：new RegExp('正则规则',attributes)
+per风格：/正则规则/attributes
+		attributes可选,包含属性 "g"、"i" 和 "m",分别用于指定全局匹配、区分大小写的匹配和多行匹配。ECMAScript 标准化之前，不支持 m 属性。
+
+attributes：
+i ：ignore 忽略大小写(正则区分大小写)
+g ：全局匹配
+
+
+行首行尾
+^行首
+$行尾
+
+量词 ：
+{n,m} ：最少n次,最多m次
+{n,} ：至少n次
+{,m} ：至多m次
+{n} : 正好n次
+* ：任意次 {0,} 建议不要使用*
+? ：零次或一次 {0,1}
++ ：一次或任意次{1,}
+
+
+字符类：
+[abc] ：a或b或c
+[a-z],[0-9] ：[0-9] 所有数字相当于\d  [a-z]所有字母  [0-9a-z]数字或字母
+[^a]  : 除了a以外的所有东西
+
+转义字符：
+\d : digital 数字   \D : [^0-9]除了数字之外
+\w : word 相当于数字字母下划线[0-9a-z_]
+\s ：space 空白
+. ：任意字符
+</body>
+<script>
+// RegExp对象：
+var str = 'a'; 
+var re = new RegExp('a'); //是否包含'a'
+alert('test方法'+re.test(str)); //test正则表达式的方法，用正则re检测str是否符合re的规则
+
+</script>
+</html>

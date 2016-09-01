@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+div { width:100px; height:120px; background:red; }
+</style>
+<script>
+	function $( v ){
+		if( typeof v === 'function' ){
+			window.onload = v;
+		} else if ( typeof v === 'string' ) {
+			return document.getElementById(v);
+		} else if ( typeof v === 'object' ) {
+			return v;
+		}
+	}
+//获取元素样式封装函数getStyle
+	function getStyle( obj, attr ){
+		return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle( obj )[attr];
+	}
+</script>
+<script>
+$(function(){
+	$('btn1').onclick = function  (){
+		// alert( $('div1').style.width ); =>不能获取到非行间样式
+		// $('div1').style.cssText = 'width:350px;';
+		
+		// alert( getComputedStyle( $('div1') ).width );		// getComputedStyle获取到的浏览器计算后的样式。IE6 7 8 不兼容
+		
+		// alert( $('div1').currentStyle.width );				// currentStyle获取当前样式，ie兼容，标准浏览器不兼容
+		/*
+		if( $('div1').currentStyle ){
+			alert( $('div1').currentStyle.width );
+		} else {
+			alert( getComputedStyle( $('div1')).width );
+		}
+		*/
+		
+		// alert( getStyle( $('div1'), 'width' ) );
+		// alert( getStyle( $('div1'), 'height' ) );
+		
+		alert( getStyle( $('div1'), 'marginRight' ) );
+		
+		/*
+			getStyle封装函数使用注意：
+				background: url() red ……		复合样式（不要获取）
+				backgroundColor					用单一样式（不要用来做判断）
+				
+				不要有空格
+				
+				不要获取样式表里未设置后的样式：不兼容
+		*/
+	};
+});
+
+
+</script>
+</head>
+
+<body>
+
+<input id="btn1" type="button" value="按钮" />
+<div id="div1"></div>
+
+</body>
+</html>

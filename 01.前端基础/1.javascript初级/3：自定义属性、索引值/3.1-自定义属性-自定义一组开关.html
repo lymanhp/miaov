@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<style>
+li { list-style:none; width:114px; height:140px; background:url(img/normal.png); float:left; margin-right:20px; cursor:pointer;}
+</style>
+
+<script>
+window.onload = function(){
+   var ali = document.getElementById('ul1').getElementsByTagName('li');
+   // var onoff = true;
+   for(var i=0;i<ali.length;i++){
+      ali[i].onoff = true; //自定义属性：给每个li加上自定义属性onoff=true,然后用this指代当前li的onoff
+      ali[i].onclick = function(){
+         if(this.onoff){
+            this.style.background='url(img/active.png)';
+            this.onoff = false;
+         }
+         else{
+            this.style.background='url(img/normal.png)';
+            this.onoff = true;
+         }
+      };
+   }
+};
+</script>
+</head>
+
+<body>
+<ul id="ul1">
+   <li></li>
+   <li></li>
+   <li></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>json面向对象</title>
+
+    <script type="text/javascript">
+    // 命名空间：把同一类方法，包在一起，避免函数命名冲突
+        var NameSpace = window.NameSpace || {};
+        NameSpace.Hello = {
+            name: 'world', 
+            sayHello: function(_name) {
+                return 'Hello ' + (_name || this.name);
+            }
+        };
+
+        alert(NameSpace.Hello.sayHello('JS'));
+    </script>
+ 
+</head>
+<body>
+ 
+</body>
+</html>

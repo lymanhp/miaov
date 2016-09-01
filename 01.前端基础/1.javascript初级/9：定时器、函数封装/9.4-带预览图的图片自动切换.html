@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<style>
+ul { padding:0; margin:0; }
+li { list-style:none; }
+#pic { width:400px; height:500px; position:relative; margin:0 auto; background:url(img/loader_ico.gif) no-repeat center #fff; }
+#pic img { width:400px; height:500px; }
+#pic ul { width:40px; position:absolute; top:0; right:-50px; }
+#pic li { width:40px; height:40px; margin-bottom:4px; background:#666; }
+#pic .active { background:#FC3; }
+#pic span { top:0; }
+#pic p { bottom:0; margin:0; }
+#pic p,#pic span { position:absolute; left:0; width:400px; height:30px; line-height:30px; text-align:center; color:#fff; background:#000; }
+</style>
+
+<script>
+window.onload = function(){
+   var oPic = document.getElementById('pic');
+   //通过标签名查找
+   var oImg = oPic.getElementsByTagName('img')[0];
+   var oSpan = oPic.getElementsByTagName('span')[0];
+   var oP = oPic.getElementsByTagName('p')[0];
+   // 存储图片数组
+   var arrUrl = ['img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg'];
+   //图片描述数组
+   var arrTitle = ['图片一','图片二','图片三','图片四'];
+   var num = 0;
+   var oUl = oPic.getElementsByTagName('ul')[0];
+      //动态获取li
+   var ali = oUl.getElementsByTagName('li');
+   /////////////////////////////////////////////
+   // 计时器自动切换图片
+   var timer = null;
+   var oDiv = document.getElementById('pic');
+   function autoPlay(){
+      timer = setInterval(function(){
+        num++;
+        num%=arrUrl.length;
+        fuTab();
+      },1000);
+   }
+   setTimeout(autoPlay,3000);
+
+   oDiv.onmouseover = function(){
+      clearInterval(timer);
+   }
+   oDiv.onmouseout = autoPlay;
+
+
+   /////////////////////////////////////////////
+
+
+   //图片数量变化，可以动态添加li
+   for(var i=0; i<arrUrl.length;i++){
+       oUl.innerHTML += '<li></li>';
+   }
+   
+   function fuTab(){
+       oImg.src = arrUrl[num];
+       oSpan.innerHTML = num+1+ '/' +arrUrl.length;
+       oP.innerHTML = arrTitle[num];
+       for( var i=0; i<ali.length; i++ ){
+          ali[i].className = '';
+       }
+       ali[num].className = 'active';
+   }
+   fuTab();
+   for(var i=0; i<ali.length;i++){
+      ali[i].index = i;
+      ali[i].onclick = function(){
+        for(var j=0; j<ali.length;j++){
+            ali[j].className = '';
+         }
+        num = this.index;
+        fuTab();
+      };
+   }
+
+
+
+};
+
+</script>
+</head>
+
+<body>
+
+<div id="pic">
+  <img src="" />
+  <span>数量正在加载中……</span>
+  <p>文字说明正在加载中……</p>
+  <ul>
+  <!--    <li class="active"></li>
+     <li></li>
+     <li></li> -->
+  </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<!--
+1.数组定义
+var arr =[1,2,3];
+var arr = new Array(1,2,3);
+
+2.数组清空
+var arr =[1,2,3];
+清空：
+arr.length = 0;或者arr =[];
+
+相反的是将字符串的length = 0,字符串不会被清空
+
+3.数组的添加方法
+arr.push()  在数组后面添加元素，返回值为数组长度
+arr.unshift() 在数组前面添加元素，返回值为数组长度
+
+4.数组的删除方法
+arr.pop() 在数组后面删除元素，返回值为删除的元素
+arr.shift() 在数组前面删除元素，返回值为删除的元素
+
+5.数组排队
+可以利用数组删除的返回值，然后添加到数组的头或者尾形成队列
+-->
+<script>
+
+// 数组清空
+var arr = [ 1,2,3 ];
+arr.length = 0;
+console.log(arr); //空
+
+var str = 'aaaaa';
+str.length = 0;
+console.log(str); //aaaa
+
+
+// 数组的添加
+var arr =[1,2,3];
+arr.push('a');
+console.log(arr);  //[1,2,3,'a']
+console.log(arr.push('a')); //返回值为数组长度5
+
+arr.unshift( 0 );  //前面添加，返回值为数组长度
+
+
+// 数组删除
+var arr = [ 'TM', '钟毅', '张森', '杜鹏', 'Leo' ];
+console.log( arr.pop() );  //返回值为末尾删除的元素
+console.log(arr);   //末尾删除元素
+console.log( arr.shift() );
+console.log( arr );
+
+
+// 数组排队
+var arr2 = [ 'TM', '钟毅', '张森', '杜鹏', 'Leo' ];
+arr2.push(arr2.shift());  //将头添加到尾
+alert(arr2);
+///arr2.unshift(arr2.pop()); //将尾添加到头
+</script>
+
+</head>
+
+<body>
+</body>
+</html>
