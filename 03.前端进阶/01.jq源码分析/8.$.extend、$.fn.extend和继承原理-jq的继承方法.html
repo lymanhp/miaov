@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="jquery-2.0.3.js"></script>
+
+<script>
+// 285行$.extend()和$.fn.extend()为什么可以写在一起
+
+//当只写一个对象自变量(一个json)的时候，JQ中扩展插件的形式
+$.extend({			//扩展工具方法
+	aaa : function(){
+		alert(1);
+	},
+	bbb : function(){
+		alert(2);
+	}
+})
+$.fn.extend({		//扩展实例方法
+	aaa : function(){
+		alert(1);
+	},
+	bbb : function(){
+		alert(2);
+	}
+})
+
+$.aaa();
+$.bbb();
+$().aaa();
+$().bbb();
+
+/*
+	$.extend();  -> extend()的this为$  -> this.aaa也就是$.aaa()
+	$.fn.extend(); -> extend()的this为$.fn -> this.aaa ->  $().aaa()
+	所以只是调用对象不一样，$.extend()和$.fn.extend()可以写在一起
+*/
+
+
+//当写多个对象自变量的时候 , 后面的对象都是扩展到第一个对象身上
+var a = {};
+$.extend( a , { name : 'hello' } , { age : 30 } );
+console.log(a); //结果：Object {name: "hello", age: 30}
+
+
+//还可以做  深拷贝 和 浅拷贝
+var a = {};
+var b = { name : 'hello' };
+var c = { name : { age : 30 }}
+$.extend(a,b); //让a拷贝b的东西
+a.name = 'hi';
+$.extend(true,a,c); //让a拷贝c的东西 默认浅拷贝，ture表示深拷贝
+a.name.age = 23;
+console.log(b.name); //hello->b的name没有收到影响
+console.log(c.name.age); //23->当没设置第一个参数ture深拷贝的时候，改变a.name.age会改变c.name.age的值
+
+
+/*jQuery.extend = jQuery.fn.extend = function(){
+	
+	定义一些变量
+	
+	if(){}   看是不是深拷贝情况
+	
+	if(){}   看参数正确不
+	
+	if(){}   看是不是插件情况
+	
+	for(){   可能有多个对象情况
+		
+		if(){}  防止循环引用
+		
+		if(){}   深拷贝
+		else if(){}   浅拷贝
+		
+	}
+	
+};*/
+/* 285-347原理解析
+通过$.extend()或$.fn.extend()里面传入的实参集合arguments进行各种判断，赋值给target然后return，extend()这个函数就相当于返回值
+例如当只写一个对象自变量的时候(306-309行进行了判断，返回this)，target返回值为这个对象自变量，可以诸如$.aaa();$().aaa()的操作
+*/
+
+var d = { name : { job : 'it' } };
+var e = { name : {age : 30} };
+
+$.extend( true , d  , e );//d继承e,e的name并不会覆盖d的name  JQ中用的是拷贝继承
+
+console.log( d ); //结果：{name:{age: 30,job: "it"}}
+
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

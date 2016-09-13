@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="jquery-2.0.3.js"></script>
+<script>
+//$('#div1') $('.box') $('div')  $('#div1 div.box') $('<li>')  $('<li>1</li><li>2</li>')
+
+// 110-117行
+if(){
+	$('<li>')   $('<li>1</li><li>2</li>')
+	
+	match = [ null, '<li>', null ];
+	match = [ null, '<li>1</li><li>2</li>', null ];
+	
+}
+else{
+	$('#div1') $('.box') $('div')  $('#div1 div.box')
+	$('<li>hello')
+	
+	match = null;  //$('.box') $('div')  $('#div1 div.box')
+	
+	match = ['#div1',null,'div1'];  //$('#div1')
+	
+	match = ['<li>hello','<li>',null];  //$('<li>hello')
+	// 116行 75行
+	对match的解释：rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/, 
+	(?:)里面的整体不作为捕获子字符串,(<[\w\W]+>)会作为捕获子字符串，表示标签<li>;([\w-]*)会作为捕获子字符串，表示div1。所以$('#div1')的match = ['#div1',null,'div1'];$('<li>hello')的match = ['<li>hello','<li>',null];
+}
+
+
+</script>
+</head>
+
+<body>
+<ul>
+</ul>
+</body>
+</html>

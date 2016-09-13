@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="jquery-2.0.3.js"></script>
+<script>
+// jq21到94行：定义了一些变量和函数
+
+/*	(function(window){
+		
+		window
+		
+	})(window);
+	//(function(){})();这是一个匿名函数
+*/
+
+
+/*  var undefined = 10;
+	alert(undefined);
+	//在某些浏览器下，undefined是会被修改的，所以jq14行window和undefined通过传参
+*/
+
+
+/*	"use strict"; 
+	a = 10; //定义了严格模式"use strict"; 这行代码会报错
+	var a = 10; //不会报错
+	//但是用严格模式会出现一些问题，所以jq20行不建议将注释去掉
+*/
+
+
+/*
+	//jq30行
+	window.a == undefined; //判断window下是否有变量a,在ie8及以下用xmlNode.method方式的时候xmlNode.a !== undefined;
+	typeof window.a == 'undefined'; //typeof兼容undefined处理
+*/
+
+/*
+	//jq58行去掉前后空格
+	var strs = '(  111111  )';
+	alert( '('+$.trim('  111111  ')+')' );
+*/
+
+
+// jq面向对象 60行
+function Aaa(){
+}
+Aaa.prototype.init = function(){
+};
+Aaa.prototype.css = function(){
+};
+var a1 = new Aaa();
+a1.init(); //一般的需要init()后使用方法
+a1.css();
+
+
+function jQuery(){
+	return new jQuery.prototype.init(); //jq把init()写在new里面
+}
+jQuery.prototype.init = function(){
+};
+jQuery.prototype.css = function(){
+};
+jQuery.prototype.init.prototype = jQuery.prototype; //对象引用，jQuery.prototype构造的方法同样可以在jQuery.prototype.init对象下使用
+
+jQuery().css(); //通过对象引用处理，这样jQuery()就可以直接使用jQuery.prototype的方法
+
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

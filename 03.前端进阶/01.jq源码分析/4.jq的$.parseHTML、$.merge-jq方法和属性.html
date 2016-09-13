@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="jquery-2.0.3.js"></script>
+<script>
+
+$(function(){
+
+	// 127行jq的parseHTML和merge方法
+	var str = '<li>1</li><li>2</li><li>3</li><script>alert(4)<\/script>';
+	var arr = jQuery.parseHTML(str,document,true); //parseHTML将字符串转化成数组，第二个参数一般为document，第三个参数为true则允许识别<script>标签
+	
+	$.each(arr,function(i){
+		$('ul').append( arr[i] );
+	});
+	
+	var arr = ['a','b'];
+	var arr = {
+		0 : 'a',
+		1 : 'b',
+		length : 2
+	};
+	
+	var arr2 = ['c','b'];
+	console.log( $.merge(arr,arr2) ); //merge连接两个数组，但其中一个为json时，会连接成json的形式，并且带上length
+	
+	// 133行
+	$('<li></li>',{title : 'hi',html : 'abcd',css : {background:'red'}}).appendTo( 'ul' );
+	
+	
+});
+
+</script>
+</head>
+
+<body>
+<ul>
+</ul>
+</body>
+</html>

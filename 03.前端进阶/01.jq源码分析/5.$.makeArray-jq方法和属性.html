@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="jquery-2.0.3.js"></script>
+<script>
+/*
+	// 166-173行
+	rootjQuery : $(document)
+
+	$('ul',document).find('li');  else : jQuery(document).find();
+	$('ul',$(document)).find('li'); if : jQuery(document).find();
+
+	// 183行
+	$(function(){}); =>$(document).ready(function(){});
+*/
+
+
+$(function(){
+	
+	var aDiv = document.getElementsByTagName('div');
+	
+	console.log(aDiv); //[div, div, div]
+	console.log( $.makeArray(aDiv,{length:0}) ); //$.makeArray添加{length:}会将数组转成json {0: div, 1: div, 2: div, length: 3}
+	
+});
+
+</script>
+</head>
+
+<body>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

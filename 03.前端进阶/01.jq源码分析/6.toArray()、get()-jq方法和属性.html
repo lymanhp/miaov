@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="jquery-2.0.3.js"></script>
+
+</head>
+
+<body>
+<span>
+知识点：
+	<!-- 202行toArray()转数组方法 -->
+	slice赋给变量：
+		slice是数组特有的方法，slice方法写成了json形式，所以用一个空数组.slice赋值给一个变量，这个变量就成了slice()函数
+	
+	call和apply:
+		obj.call(thisObj, arg1, arg2, ...);
+		obj.apply(thisObj, [arg1, arg2, ...]);
+		两者作用一致，都是把obj(即this)绑定到thisObj，这时候thisObj具备了obj的属性和方法。或者说thisObj『继承』了obj的属性和方法。
+
+	var core_deletedIds = [],
+	core_slice = core_deletedIds.slice;<!-- 将数组的slice方法赋给变量core_slice -->
+	toArray: function() {
+		return core_slice.call( this ); <!-- 通过call将core_slice的slice()继承给this,slice()不传参数会截取整个数组或json -->
+	},
+</span>
+<script>
+
+
+$(function(){
+	
+	console.log($('div').toArray());
+	/*
+	  $('div') 结果为 { 0 : div , 1 : div , 2 : div , length : 3 }
+	  $('div').toArray() 结果为 [div,div,div]
+	*/
+	
+	
+	for(var i=0;i<$('div').get().length;i++){
+		$('div').get(i).innerHTML = '222222';//get()转原生对象
+	}
+	
+	
+});
+
+</script>
+<div>11111111</div>
+<div>111111111</div>
+<div>111111111</div>
+</body>
+</html>
